@@ -1,6 +1,10 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
 
 env:
   CI: true
@@ -35,9 +39,6 @@ jobs:
 
       - name: Lint
         run: npm run lint
-
-      - name: TypeScript typecheck
-        run: npm run typecheck
 
       - name: Test
         run: npm run test --maxWorkers=2
