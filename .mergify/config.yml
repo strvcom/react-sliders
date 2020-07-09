@@ -1,0 +1,21 @@
+pull_request_rules:
+  - name: Merge my PRs when CI/CD passes
+    conditions:
+      - author=xhudec
+      - status-success=build
+      - label!=Work in progress ⚠️
+    actions:
+      merge:
+        method: squash
+  - name: Merge pull requests from dependabot if CI passes
+    conditions:
+      - author=dependabot[bot]
+      - status-success=build
+    actions:
+      merge:
+        method: squash
+  - name: Delete host branch after PR is merged
+    conditions:
+      - merged
+    actions:
+      delete_head_branch: {}
