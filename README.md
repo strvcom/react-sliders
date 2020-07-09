@@ -1,5 +1,12 @@
 # `react-sliders`
 
+![CI](https://github.com/xhudec/react-sliders/workflows/CI/badge.svg)
+![Dependabot](https://flat.badgen.net/dependabot/xhudec/react-sliders?icon=dependabot)
+[![Mergify Status][mergify-status]][mergify]
+
+[mergify]: https://mergify.io
+[mergify-status]: https://img.shields.io/endpoint.svg?url=https://gh.mergify.io/badges/<owner>/<repo>&style=flat
+
 This project was bootstrapped with [`TSDX`](https://github.com/formik/tsdx).
 
 ## Goals
