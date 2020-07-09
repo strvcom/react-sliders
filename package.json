@@ -1,0 +1,69 @@
+{
+  "version": "0.1.0",
+  "name": "react-sliders",
+  "license": "MIT",
+  "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
+  "module": "dist/react-slider.esm.js",
+  "engines": {
+    "node": ">=10"
+  },
+  "files": [
+    "dist",
+    "src"
+  ],
+  "author": "Lukas Hudec",
+  "scripts": {
+    "dev": "tsdx watch",
+    "build": "tsdx build",
+    "prepare": "tsdx build",
+    "_prettier": "prettier \"**/*.+(js|jsx|ts|tsx|json|css|less|graphql|md|mdx)\"",
+    "prettier:format": "npm run _prettier -- --write",
+    "prettier:validate": "npm run _prettier -- --list-different",
+    "lint": "npm run lint:js",
+    "lint:js": "eslint --ext js,jsx,ts,tsx src",
+    "typecheck": "tsc --project ./tsconfig.json",
+    "test": "is-ci \"test:coverage\" \"test:watch\"",
+    "test:watch": "tsdx test --watch",
+    "test:coverage": "tsdx test --coverage",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
+  },
+  "peerDependencies": {
+    "react": ">=16"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.10.4",
+    "@commitlint/cli": "^9.0.1",
+    "@storybook/addon-actions": "^5.3.19",
+    "@storybook/addon-docs": "^5.3.19",
+    "@storybook/addon-info": "^5.3.19",
+    "@storybook/addon-links": "^5.3.19",
+    "@storybook/addons": "^5.3.19",
+    "@storybook/react": "^5.3.19",
+    "@strv/commitlint-config": "^1.1.0",
+    "@strv/eslint-config-react": "^3.1.2",
+    "@strv/eslint-config-typescript": "^2.3.0",
+    "@strv/prettier-config": "^1.0.3",
+    "@testing-library/react": "^10.4.5",
+    "@types/react": "^16.9.41",
+    "@types/react-dom": "^16.9.8",
+    "babel-loader": "^8.1.0",
+    "eslint": "^7.4.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jest": "^23.18.0",
+    "husky": "^4.2.5",
+    "is-ci-cli": "^2.1.2",
+    "prettier": "^2.0.5",
+    "pretty-quick": "^2.0.1",
+    "react": "^16.13.1",
+    "react-docgen-typescript-loader": "^3.7.2",
+    "react-dom": "^16.13.1",
+    "react-is": "^16.13.1",
+    "ts-loader": "^7.0.5",
+    "tsdx": "^0.13.2",
+    "tslib": "^2.0.0",
+    "typescript": "^3.9.6"
+  }
+}
