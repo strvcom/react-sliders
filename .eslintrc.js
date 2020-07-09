@@ -18,6 +18,7 @@ module.exports = {
     tsconfigRootDir: __dirname,
     project: ['./tsconfig.json'],
   },
+  ignorePatterns: ['example/*', '.eslintrc.js', 'jest.config.js'],
   env: {
     'jest/globals': true,
   },
@@ -44,10 +45,23 @@ module.exports = {
         format: ['PascalCase'],
       },
     ],
-    'padding-line-between-statements': 'off',
+    '@typescript-eslint/restrict-template-expressions': [
+      'warn',
+      {
+        allowNumber: true,
+      },
+    ],
 
+    'react/prop-types': 'off',
+    'no-shadow': 'off',
+    'import/exports-last': 'off',
+    'import/group-exports': 'off',
+    'padding-line-between-statements': 'off',
     '@typescript-eslint/prefer-readonly-parameter-types': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
+
+    // conflicts with prettier
+    '@typescript-eslint/no-extra-parens': 'off',
   },
 }

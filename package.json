@@ -12,7 +12,7 @@
     "dist",
     "src"
   ],
-  "author": "Lukas Hudec",
+  "author": "Lukas Hudec <hudec.luke@gamil.com>",
   "scripts": {
     "dev": "tsdx watch",
     "build": "tsdx build",
@@ -23,8 +23,8 @@
     "lint": "npm run lint:js",
     "lint:js": "eslint --ext js,jsx,ts,tsx src",
     "test": "is-ci \"test:coverage\" \"test:watch\"",
-    "test:watch": "tsdx test --watch",
-    "test:coverage": "tsdx test --coverage",
+    "test:watch": "tsdx test --watch --verbose --env=jest-environment-jsdom-sixteen",
+    "test:coverage": "tsdx test --coverage --env=jest-environment-jsdom-sixteen",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -44,9 +44,11 @@
     "@strv/eslint-config-react": "^3.1.2",
     "@strv/eslint-config-typescript": "^2.3.0",
     "@strv/prettier-config": "^1.0.3",
+    "@testing-library/jest-dom": "^5.11.0",
     "@testing-library/react": "^10.4.5",
     "@types/react": "^16.9.41",
     "@types/react-dom": "^16.9.8",
+    "@types/styled-components": "^5.1.1",
     "babel-loader": "^8.1.0",
     "eslint": "^7.4.0",
     "eslint-config-prettier": "^6.11.0",
@@ -54,6 +56,7 @@
     "eslint-plugin-jest": "^23.18.0",
     "husky": "^4.2.5",
     "is-ci-cli": "^2.1.2",
+    "jest-environment-jsdom-sixteen": "^1.0.3",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
     "react": "^16.13.1",
@@ -64,5 +67,8 @@
     "tsdx": "^0.13.2",
     "tslib": "^2.0.0",
     "typescript": "^3.9.6"
+  },
+  "dependencies": {
+    "styled-components": "^5.1.1"
   }
 }
