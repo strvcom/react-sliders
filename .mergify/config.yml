@@ -4,13 +4,15 @@ pull_request_rules:
       - author=xhudec
       - status-success=build
       - label!=Work in progress ⚠️
+      - base=master
     actions:
       merge:
         method: squash
   - name: Merge pull requests from dependabot if CI passes
     conditions:
-      - author=dependabot[bot]
+      - author~=^dependabot(|-preview)\[bot\]$
       - status-success=build
+      - base=master
     actions:
       merge:
         method: squash
