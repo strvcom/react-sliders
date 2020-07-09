@@ -22,7 +22,6 @@
     "prettier:validate": "npm run _prettier -- --list-different",
     "lint": "npm run lint:js",
     "lint:js": "eslint --ext js,jsx,ts,tsx src",
-    "typecheck": "tsc --project ./tsconfig.json",
     "test": "is-ci \"test:coverage\" \"test:watch\"",
     "test:watch": "tsdx test --watch",
     "test:coverage": "tsdx test --coverage",
