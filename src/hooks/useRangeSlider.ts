@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { TRangeTuple, KeyCodes } from '../types'
+import { TRangeTuple, KeyCodes, IRangeMarker } from '../types'
 
 import {
   calculatePercentage,
@@ -8,7 +8,10 @@ import {
   trackMovement,
   clamp,
   roundValueToStep,
+  isInRange,
 } from 'utils'
+
+const DEFAULT_STEP = 1
 
 interface IUseRangeSlider {
   value: TRangeTuple
@@ -16,6 +19,9 @@ interface IUseRangeSlider {
   max: number
   onChange: (range: TRangeTuple) => void
 
+  /**
+   * @default 1
+   */
   step?: number
 }
 
@@ -24,7 +30,7 @@ const useRangeSlider = ({
   min,
   max,
   onChange,
-  step,
+  step = DEFAULT_STEP,
 }: IUseRangeSlider) => {
   const railRef = React.useRef<HTMLSpanElement>(null)
   const trackRef = React.useRef<HTMLSpanElement>(null)
@@ -104,26 +110,23 @@ const useRangeSlider = ({
       switch (event.keyCode) {
         case KeyCodes.up:
         case KeyCodes.right:
-          newValue += step ?? 1
+          newValue += step
+          break
+        case KeyCodes.down:
+        case KeyCodes.left:
+          newValue -= step
           break
 
         case KeyCodes.pageUp:
-          newValue += (step ?? 1) * 10
+          newValue += step * 10
+          break
+        case KeyCodes.pageDown:
+          newValue -= step * 10
           break
 
         case KeyCodes.end:
           newValue = activeHandle.current === 'min' ? min : minValue
           break
-
-        case KeyCodes.down:
-        case KeyCodes.left:
-          newValue -= step ?? 1
-          break
-
-        case KeyCodes.pageDown:
-          newValue -= (step ?? 1) * 10
-          break
-
         case KeyCodes.home:
           newValue = activeHandle.current === 'min' ? maxValue : max
           break
@@ -199,8 +202,8 @@ const useRangeSlider = ({
       role: 'slider',
       tabIndex: 0,
       'aria-valuemin': min,
-      'aria-valuemax': maxValue,
       'aria-valuenow': minValue,
+      'aria-valuemax': maxValue,
       onFocus: () => {
         activeHandle.current = 'min'
       },
@@ -227,8 +230,8 @@ const useRangeSlider = ({
       role: 'slider',
       tabIndex: 0,
       'aria-valuemin': minValue,
-      'aria-valuemax': max,
       'aria-valuenow': maxValue,
+      'aria-valuemax': max,
       onFocus: () => {
         activeHandle.current = 'max'
       },
@@ -249,11 +252,24 @@ const useRangeSlider = ({
     }
   }, [handleKeyDown, handleMouseDown, handleTouchStart, max, maxValue, minValue])
 
+  const getMarkerProps = React.useCallback(
+    (marker: IRangeMarker) => {
+      const markerPosition = calculatePercentage({ current: marker.value, min, max })
+
+      return {
+        style: { left: `${markerPosition}%` },
+        isInRange: isInRange({ value: marker.value, min: minValue, max: maxValue }),
+      }
+    },
+    [max, maxValue, min, minValue]
+  )
+
   return {
     getTrackProps,
     getRailProps,
     getMinHandleProps,
     getMaxHandleProps,
+    getMarkerProps,
   }
 }
 
