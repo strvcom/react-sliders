@@ -23,7 +23,6 @@ const SliderRail = styled.span`
 const SliderTrack = styled.span`
   position: absolute;
   display: block;
-  width: 50%;
   height: 0.3rem;
   background-color: #0095ff;
   border-radius: 0.1rem;
@@ -40,8 +39,11 @@ const SliderThumb = styled.span`
     0 0 0 0.1rem rgba(0, 0, 0, 0);
   border-radius: 50%;
   transition: box-shadow 200ms ease-in-out;
+  outline: none;
 
-  &:hover {
+  &:hover,
+  &:focus {
+    z-index: 2;
     box-shadow: 0 0.3rem 0.1rem rgba(0, 0, 0, 0.1), 0 0.4rem 0.8rem rgba(0, 0, 0, 0.3),
       0 0 0 0.1rem rgba(0, 0, 0, 0.02);
   }
@@ -73,8 +75,6 @@ const SliderMarkerLabel = styled.span`
   font-weight: 600;
   font-size: 1.2rem;
   color: #b7becc;
-  letter-spacing: 0.04rem;
-  line-height: 1.6rem;
   user-select: none;
 
   text-align: center;

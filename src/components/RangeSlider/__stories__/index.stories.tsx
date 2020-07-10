@@ -49,6 +49,7 @@ const WithMarkers = () => {
   return (
     <DemoContainer>
       <RangeSlider value={range} min={0} max={100} markers={demoMarkers} onChange={setRange} />
+      <pre>{JSON.stringify({ values: range }, null, 2)}</pre>
     </DemoContainer>
   )
 }
