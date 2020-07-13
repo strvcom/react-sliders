@@ -38,7 +38,6 @@ const useSlider = ({ value, min, max, onChange, step = DEFAULT_STEP }: IUseSlide
 
     if (thumbRef.current && trackRef.current) {
       thumbRef.current.style.left = `${valueThumbPercentage}%`
-      trackRef.current.style.left = `${valueThumbPercentage}%`
       trackRef.current.style.width = `${valueThumbPercentage}%`
     }
   }, [value, min, max])
