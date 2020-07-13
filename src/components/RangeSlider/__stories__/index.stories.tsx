@@ -29,6 +29,7 @@ const Basic = () => {
   return (
     <DemoContainer>
       <RangeSlider value={range} min={0} max={100} onChange={setRange} />
+      <pre>{JSON.stringify({ values: range }, null, 2)}</pre>
     </DemoContainer>
   )
 }
@@ -39,6 +40,7 @@ const WithStep = () => {
   return (
     <DemoContainer>
       <RangeSlider value={range} min={0} max={1000} step={100} onChange={setRange} />
+      <pre>{JSON.stringify({ values: range }, null, 2)}</pre>
     </DemoContainer>
   )
 }
@@ -49,9 +51,21 @@ const WithMarkers = () => {
   return (
     <DemoContainer>
       <RangeSlider value={range} min={0} max={100} markers={demoMarkers} onChange={setRange} />
+      <pre>{JSON.stringify({ values: range }, null, 2)}</pre>
+    </DemoContainer>
+  )
+}
+
+const WithLargeRange = () => {
+  const [range, setRange] = useRangeSliderDemo([300000, 700000])
+
+  return (
+    <DemoContainer>
+      <RangeSlider value={range} min={0} max={1000000} step={1000} onChange={setRange} />
+      <pre>{JSON.stringify({ values: range }, null, 2)}</pre>
     </DemoContainer>
   )
 }
 
 export default { title: 'RangeSlider' }
-export { Basic, WithStep, WithMarkers }
+export { Basic, WithStep, WithMarkers, WithLargeRange }

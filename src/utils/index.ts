@@ -61,7 +61,7 @@ const isInRange = ({ value, min, max }: IIsInRange) => {
   return value >= min && value <= max
 }
 
-const trackMovement = (event: TouchEvent | MouseEvent, touchId?: number): number | null => {
+const trackMovement = (event: TouchEvent | MouseEvent, touchId: number | null): number | null => {
   // Check if event is Touch Event
   if (touchId !== undefined && 'changedTouches' in event) {
     // eslint-disable-next-line @typescript-eslint/prefer-for-of

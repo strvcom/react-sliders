@@ -5,7 +5,7 @@ import {
   clamp,
   isInRange,
   trackMovement,
-} from '../utils'
+} from '..'
 
 describe('Range Slider utils', () => {
   describe('calculatePercentage', () => {
@@ -255,7 +255,7 @@ describe('Range Slider utils', () => {
       }
       const expected = 100
 
-      expect(trackMovement(input.event)).toBe(expected)
+      expect(trackMovement(input.event, null)).toBe(expected)
     })
 
     it('should return touch clientX when Touch Event is obtained', () => {
