@@ -13,7 +13,7 @@ import {
 
 const DEFAULT_STEP = 1
 
-interface IUseRangeSlider {
+export interface IUseRangeSlider {
   value: TRangeTuple
   min: number
   max: number
