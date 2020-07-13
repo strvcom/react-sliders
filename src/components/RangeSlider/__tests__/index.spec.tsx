@@ -9,15 +9,15 @@ const renderRangeSlider = (propOverrides: Partial<IRangeSlider> = {}) => {
   )
 
   const getTrackElement = () => {
-    return wrapper.getByTestId('range-track')
+    return wrapper.getByTestId('range-slider-track')
   }
 
   const getMinThumbElement = () => {
-    return wrapper.getByTestId('range-min-thumb')
+    return wrapper.getByTestId('range-slider-min-thumb')
   }
 
   const getMaxThumbElement = () => {
-    return wrapper.getByTestId('range-max-thumb')
+    return wrapper.getByTestId('range-slider-max-thumb')
   }
 
   return {
