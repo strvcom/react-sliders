@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { TRangeTuple, KeyCodes, IRangeMarker } from '../types'
+import { KeyCodes, IRangeMarker } from '../types'
 
 import {
   calculatePercentage,
@@ -13,11 +13,11 @@ import {
 
 const DEFAULT_STEP = 1
 
-export interface IUseRangeSlider {
-  value: TRangeTuple
+export interface IUseSlider {
+  value: number
   min: number
   max: number
-  onChange: (range: TRangeTuple) => void
+  onChange: (value: number) => void
 
   /**
    * @default 1
@@ -25,41 +25,28 @@ export interface IUseRangeSlider {
   step?: number
 }
 
-const useRangeSlider = ({
-  value: [minValue, maxValue],
-  min,
-  max,
-  onChange,
-  step = DEFAULT_STEP,
-}: IUseRangeSlider) => {
+const useSlider = ({ value, min, max, onChange, step = DEFAULT_STEP }: IUseSlider) => {
   const railRef = React.useRef<HTMLSpanElement>(null)
   const trackRef = React.useRef<HTMLSpanElement>(null)
-  const minThumbRef = React.useRef<HTMLSpanElement>(null)
-  const maxThumbRef = React.useRef<HTMLSpanElement>(null)
+  const thumbRef = React.useRef<HTMLSpanElement>(null)
 
-  const activeHandle = React.useRef<'min' | 'max' | null>(null)
   const diff = React.useRef<number>(0)
   const touchId = React.useRef<number | null>(null)
 
   React.useLayoutEffect(() => {
-    const minThumbPercentage = calculatePercentage({ current: minValue, min, max })
-    const maxThumbPercentage = calculatePercentage({ current: maxValue, min, max })
+    const valueThumbPercentage = calculatePercentage({ current: value, min, max })
 
-    if (minThumbRef.current && maxThumbRef.current && trackRef.current) {
-      minThumbRef.current.style.left = `${minThumbPercentage}%`
-      maxThumbRef.current.style.left = `${maxThumbPercentage}%`
-      trackRef.current.style.left = `${minThumbPercentage}%`
-      trackRef.current.style.width = `calc(${maxThumbPercentage}% - ${minThumbPercentage}%)`
+    if (thumbRef.current && trackRef.current) {
+      thumbRef.current.style.left = `${valueThumbPercentage}%`
+      trackRef.current.style.width = `${valueThumbPercentage}%`
     }
-  }, [minValue, maxValue, min, max])
+  }, [value, min, max])
 
   const calculateNewValue = React.useCallback(
     (xPosition: number): number => {
-      const activeHandleRef = activeHandle.current === 'min' ? minThumbRef : maxThumbRef
-
       const newXPosition =
         xPosition - diff.current - (railRef.current?.getBoundingClientRect().left ?? 0)
-      const end = (railRef.current?.offsetWidth ?? 0) - (activeHandleRef.current?.offsetWidth ?? 0)
+      const end = (railRef.current?.offsetWidth ?? 0) - (thumbRef.current?.offsetWidth ?? 0)
 
       const newPercentage = calculatePercentage({ current: newXPosition, min: 0, max: end })
 
@@ -71,18 +58,18 @@ const useRangeSlider = ({
   const handleChange = React.useCallback(
     (newValue: number) => {
       let clampedValue = clamp({
+        min,
+        max,
         value: newValue,
-        min: activeHandle.current === 'min' ? min : minValue,
-        max: activeHandle.current === 'max' ? max : maxValue,
       })
 
       if (step) {
         clampedValue = roundValueToStep({ value: clampedValue, step, min })
       }
 
-      onChange(activeHandle.current === 'min' ? [clampedValue, maxValue] : [minValue, clampedValue])
+      onChange(clampedValue)
     },
-    [max, maxValue, min, minValue, onChange, step]
+    [max, min, onChange, step]
   )
 
   const handleMove = React.useCallback(
@@ -101,11 +88,7 @@ const useRangeSlider = ({
 
   const handleKeyDown = React.useCallback(
     (event: React.KeyboardEvent<HTMLElement>) => {
-      if (!activeHandle.current) {
-        return
-      }
-
-      let newValue = activeHandle.current === 'min' ? minValue : maxValue
+      let newValue = value
 
       switch (event.keyCode) {
         case KeyCodes.up:
@@ -125,10 +108,10 @@ const useRangeSlider = ({
           break
 
         case KeyCodes.end:
-          newValue = activeHandle.current === 'min' ? min : minValue
+          newValue = min
           break
         case KeyCodes.home:
-          newValue = activeHandle.current === 'min' ? maxValue : max
+          newValue = max
           break
 
         default:
@@ -136,7 +119,7 @@ const useRangeSlider = ({
 
       handleChange(newValue)
     },
-    [handleChange, max, maxValue, min, minValue, step]
+    [handleChange, max, min, step, value]
   )
 
   const handleMouseUp = React.useCallback(() => {
@@ -146,8 +129,7 @@ const useRangeSlider = ({
 
   const handleMouseDown = React.useCallback(
     (event: React.MouseEvent<HTMLSpanElement>) => {
-      const activeHandleRef = activeHandle.current === 'min' ? minThumbRef : maxThumbRef
-      diff.current = event.clientX - (activeHandleRef.current?.getBoundingClientRect().left ?? 0)
+      diff.current = event.clientX - (thumbRef.current?.getBoundingClientRect().left ?? 0)
 
       document.addEventListener('mousemove', handleMove)
       document.addEventListener('mouseup', handleMouseUp)
@@ -175,8 +157,7 @@ const useRangeSlider = ({
         return
       }
 
-      const activeHandleRef = activeHandle.current === 'min' ? minThumbRef : maxThumbRef
-      diff.current = newXPosition - (activeHandleRef.current?.getBoundingClientRect().left ?? 0)
+      diff.current = newXPosition - (thumbRef.current?.getBoundingClientRect().left ?? 0)
 
       document.addEventListener('touchmove', handleMove)
       document.addEventListener('touchend', handleTouchEnd)
@@ -196,61 +177,19 @@ const useRangeSlider = ({
     }
   }, [])
 
-  const getMinHandleProps = React.useCallback(() => {
+  const getHandleProps = React.useCallback(() => {
     return {
-      ref: minThumbRef,
+      ref: thumbRef,
       role: 'slider',
       tabIndex: 0,
       'aria-valuemin': min,
-      'aria-valuenow': minValue,
-      'aria-valuemax': maxValue,
-      onFocus: () => {
-        activeHandle.current = 'min'
-      },
-      onBlur: () => {
-        activeHandle.current = null
-      },
-      onKeyDown: (event: React.KeyboardEvent<HTMLElement>) => {
-        handleKeyDown(event)
-      },
-      onMouseDown: (event: React.MouseEvent<HTMLElement>) => {
-        activeHandle.current = 'min'
-        handleMouseDown(event)
-      },
-      onTouchStart: (event: React.TouchEvent<HTMLElement>) => {
-        activeHandle.current = 'min'
-        handleTouchStart(event)
-      },
-    }
-  }, [handleKeyDown, handleMouseDown, handleTouchStart, maxValue, min, minValue])
-
-  const getMaxHandleProps = React.useCallback(() => {
-    return {
-      ref: maxThumbRef,
-      role: 'slider',
-      tabIndex: 0,
-      'aria-valuemin': minValue,
-      'aria-valuenow': maxValue,
+      'aria-valuenow': value,
       'aria-valuemax': max,
-      onFocus: () => {
-        activeHandle.current = 'max'
-      },
-      onBlur: () => {
-        activeHandle.current = null
-      },
-      onKeyDown: (event: React.KeyboardEvent<HTMLElement>) => {
-        handleKeyDown(event)
-      },
-      onMouseDown: (event: React.MouseEvent<HTMLElement>) => {
-        activeHandle.current = 'max'
-        handleMouseDown(event)
-      },
-      onTouchStart: (event: React.TouchEvent<HTMLElement>) => {
-        activeHandle.current = 'max'
-        handleTouchStart(event)
-      },
+      onKeyDown: handleKeyDown,
+      onMouseDown: handleMouseDown,
+      onTouchStart: handleTouchStart,
     }
-  }, [handleKeyDown, handleMouseDown, handleTouchStart, max, maxValue, minValue])
+  }, [handleKeyDown, handleMouseDown, handleTouchStart, max, min, value])
 
   const getMarkerProps = React.useCallback(
     (marker: IRangeMarker) => {
@@ -258,19 +197,18 @@ const useRangeSlider = ({
 
       return {
         style: { left: `${markerPosition}%` },
-        isInRange: isInRange({ value: marker.value, min: minValue, max: maxValue }),
+        isInRange: isInRange({ value: marker.value, min, max: value }),
       }
     },
-    [max, maxValue, min, minValue]
+    [max, min, value]
   )
 
   return {
     getTrackProps,
     getRailProps,
-    getMinHandleProps,
-    getMaxHandleProps,
+    getHandleProps,
     getMarkerProps,
   }
 }
 
-export { useRangeSlider }
+export { useSlider }

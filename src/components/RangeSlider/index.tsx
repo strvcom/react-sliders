@@ -7,7 +7,7 @@ import {
   SliderThumb,
   SliderMarker,
   SliderMarkerLabel,
-} from './styled'
+} from '../styled'
 
 import { useRangeSlider } from 'hooks/useRangeSlider'
 
@@ -48,23 +48,21 @@ const RangeSlider: React.FC<IRangeSlider> = ({
   return (
     <SliderContainer>
       <SliderRail {...getRailProps()} />
-      <SliderTrack data-testid="range-track" {...getTrackProps()} />
+      <SliderTrack data-testid="range-slider-track" {...getTrackProps()} />
 
       {markers?.map((marker) => {
         const { style, isInRange } = getMarkerProps(marker)
 
         return (
-          <>
-            <SliderMarkerLabel key={`marker-label-${marker.label}`} style={style}>
-              {marker.label}
-            </SliderMarkerLabel>
-            <SliderMarker key={`marker-${marker.label}`} isInRange={isInRange} style={style} />
-          </>
+          <React.Fragment key={`marker-${marker.label}`}>
+            <SliderMarkerLabel style={style}>{marker.label}</SliderMarkerLabel>
+            <SliderMarker isInRange={isInRange} style={style} />
+          </React.Fragment>
         )
       })}
 
-      <SliderThumb data-testid="range-min-thumb" {...getMinHandleProps()} />
-      <SliderThumb data-testid="range-max-thumb" {...getMaxHandleProps()} />
+      <SliderThumb data-testid="range-slider-min-thumb" {...getMinHandleProps()} />
+      <SliderThumb data-testid="range-slider-max-thumb" {...getMaxHandleProps()} />
     </SliderContainer>
   )
 }
