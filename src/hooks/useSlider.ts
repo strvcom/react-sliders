@@ -23,9 +23,10 @@ export interface IUseSlider {
    * @default 1
    */
   step?: number
+  formatValue?: (value: number) => string
 }
 
-const useSlider = ({ value, min, max, onChange, step = DEFAULT_STEP }: IUseSlider) => {
+const useSlider = ({ value, min, max, onChange, step = DEFAULT_STEP, formatValue }: IUseSlider) => {
   const railRef = React.useRef<HTMLSpanElement>(null)
   const trackRef = React.useRef<HTMLSpanElement>(null)
   const thumbRef = React.useRef<HTMLSpanElement>(null)
@@ -182,14 +183,15 @@ const useSlider = ({ value, min, max, onChange, step = DEFAULT_STEP }: IUseSlide
       ref: thumbRef,
       role: 'slider',
       tabIndex: 0,
-      'aria-valuemin': min,
       'aria-valuenow': value,
+      'aria-valuetext': formatValue ? formatValue(value) : String(value),
+      'aria-valuemin': min,
       'aria-valuemax': max,
       onKeyDown: handleKeyDown,
       onMouseDown: handleMouseDown,
       onTouchStart: handleTouchStart,
     }
-  }, [handleKeyDown, handleMouseDown, handleTouchStart, max, min, value])
+  }, [formatValue, handleKeyDown, handleMouseDown, handleTouchStart, max, min, value])
 
   const getMarkerProps = React.useCallback(
     (marker: IRangeMarker) => {
