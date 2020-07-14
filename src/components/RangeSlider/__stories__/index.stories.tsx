@@ -15,13 +15,7 @@ const DemoContainer = styled.div`
   padding: 0 5rem;
 `
 
-const demoMarkers = [
-  { label: '$0', value: 0 },
-  { label: '$25', value: 25 },
-  { label: '$50', value: 50 },
-  { label: '$75', value: 75 },
-  { label: '$100', value: 100 },
-]
+const demoMarkers = [{ value: 0 }, { value: 25 }, { value: 50 }, { value: 75 }, { value: 100 }]
 
 const Basic = () => {
   const [range, setRange] = useRangeSliderDemo()
@@ -56,6 +50,24 @@ const WithMarkers = () => {
   )
 }
 
+const WithCustomValueFormat = () => {
+  const [range, setRange] = useRangeSliderDemo([30, 70])
+
+  return (
+    <DemoContainer>
+      <RangeSlider
+        value={range}
+        min={0}
+        max={100}
+        markers={demoMarkers}
+        onChange={setRange}
+        formatValue={(value) => `$${value}`}
+      />
+      <pre>{JSON.stringify({ values: range }, null, 2)}</pre>
+    </DemoContainer>
+  )
+}
+
 const WithLargeRange = () => {
   const [range, setRange] = useRangeSliderDemo([300000, 700000])
 
@@ -68,4 +80,4 @@ const WithLargeRange = () => {
 }
 
 export default { title: 'RangeSlider' }
-export { Basic, WithStep, WithMarkers, WithLargeRange }
+export { Basic, WithStep, WithMarkers, WithCustomValueFormat, WithLargeRange }

@@ -23,6 +23,7 @@ export interface IUseRangeSlider {
    * @default 1
    */
   step?: number
+  formatValue?: (value: number) => string
 }
 
 const useRangeSlider = ({
@@ -31,6 +32,7 @@ const useRangeSlider = ({
   max,
   onChange,
   step = DEFAULT_STEP,
+  formatValue,
 }: IUseRangeSlider) => {
   const railRef = React.useRef<HTMLSpanElement>(null)
   const trackRef = React.useRef<HTMLSpanElement>(null)
@@ -201,8 +203,9 @@ const useRangeSlider = ({
       ref: minThumbRef,
       role: 'slider',
       tabIndex: 0,
-      'aria-valuemin': min,
       'aria-valuenow': minValue,
+      'aria-valuetext': formatValue ? formatValue(minValue) : String(minValue),
+      'aria-valuemin': min,
       'aria-valuemax': maxValue,
       onFocus: () => {
         activeHandle.current = 'min'
@@ -222,15 +225,16 @@ const useRangeSlider = ({
         handleTouchStart(event)
       },
     }
-  }, [handleKeyDown, handleMouseDown, handleTouchStart, maxValue, min, minValue])
+  }, [formatValue, handleKeyDown, handleMouseDown, handleTouchStart, maxValue, min, minValue])
 
   const getMaxHandleProps = React.useCallback(() => {
     return {
       ref: maxThumbRef,
       role: 'slider',
       tabIndex: 0,
-      'aria-valuemin': minValue,
       'aria-valuenow': maxValue,
+      'aria-valuetext': formatValue ? formatValue(maxValue) : String(maxValue),
+      'aria-valuemin': minValue,
       'aria-valuemax': max,
       onFocus: () => {
         activeHandle.current = 'max'
@@ -250,7 +254,7 @@ const useRangeSlider = ({
         handleTouchStart(event)
       },
     }
-  }, [handleKeyDown, handleMouseDown, handleTouchStart, max, maxValue, minValue])
+  }, [formatValue, handleKeyDown, handleMouseDown, handleTouchStart, max, maxValue, minValue])
 
   const getMarkerProps = React.useCallback(
     (marker: IRangeMarker) => {

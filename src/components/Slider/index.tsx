@@ -21,15 +21,25 @@ export interface ISliderProps {
 
   step?: number
   markers?: IRangeMarker[]
+  formatValue?: (value: number) => string
 }
 
-const Slider: React.FC<ISliderProps> = ({ value, min, max, onChange, step, markers }) => {
+const Slider: React.FC<ISliderProps> = ({
+  value,
+  min,
+  max,
+  onChange,
+  step,
+  markers,
+  formatValue,
+}) => {
   const { getRailProps, getTrackProps, getHandleProps, getMarkerProps } = useSlider({
     value,
     min,
     max,
     onChange,
     step,
+    formatValue,
   })
 
   return (
@@ -41,8 +51,10 @@ const Slider: React.FC<ISliderProps> = ({ value, min, max, onChange, step, marke
         const { style, isInRange } = getMarkerProps(marker)
 
         return (
-          <React.Fragment key={`marker-${marker.label}`}>
-            <SliderMarkerLabel style={style}>{marker.label}</SliderMarkerLabel>
+          <React.Fragment key={`marker-${marker.value}`}>
+            <SliderMarkerLabel style={style}>
+              {marker.label ?? (formatValue ? formatValue(marker.value) : marker.value)}
+            </SliderMarkerLabel>
             <SliderMarker isInRange={isInRange} style={style} />
           </React.Fragment>
         )

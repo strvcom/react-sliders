@@ -21,6 +21,7 @@ export interface IRangeSliderProps {
 
   step?: number
   markers?: IRangeMarker[]
+  formatValue?: (value: number) => string
 }
 
 const RangeSlider: React.FC<IRangeSliderProps> = ({
@@ -30,6 +31,7 @@ const RangeSlider: React.FC<IRangeSliderProps> = ({
   onChange = () => {},
   step,
   markers,
+  formatValue,
 }) => {
   const {
     getRailProps,
@@ -54,8 +56,10 @@ const RangeSlider: React.FC<IRangeSliderProps> = ({
         const { style, isInRange } = getMarkerProps(marker)
 
         return (
-          <React.Fragment key={`marker-${marker.label}`}>
-            <SliderMarkerLabel style={style}>{marker.label}</SliderMarkerLabel>
+          <React.Fragment key={`marker-${marker.value}`}>
+            <SliderMarkerLabel style={style}>
+              {marker.label ?? (formatValue ? formatValue(marker.value) : marker.value)}
+            </SliderMarkerLabel>
             <SliderMarker isInRange={isInRange} style={style} />
           </React.Fragment>
         )

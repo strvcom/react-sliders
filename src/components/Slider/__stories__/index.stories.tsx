@@ -14,13 +14,7 @@ const DemoContainer = styled.div`
   padding: 0 5rem;
 `
 
-const demoMarkers = [
-  { label: '$0', value: 0 },
-  { label: '$25', value: 25 },
-  { label: '$50', value: 50 },
-  { label: '$75', value: 75 },
-  { label: '$100', value: 100 },
-]
+const demoMarkers = [{ value: 0 }, { value: 25 }, { value: 50 }, { value: 75 }, { value: 100 }]
 
 const Basic = () => {
   const [value, setValue] = useSliderDemo()
@@ -34,7 +28,7 @@ const Basic = () => {
 }
 
 const WithStep = () => {
-  const [value, setValue] = useSliderDemo(50)
+  const [value, setValue] = useSliderDemo(500)
 
   return (
     <DemoContainer>
@@ -55,5 +49,23 @@ const WithMarkers = () => {
   )
 }
 
+const WithCustomValueFormat = () => {
+  const [value, setValue] = useSliderDemo(50)
+
+  return (
+    <DemoContainer>
+      <Slider
+        value={value}
+        min={0}
+        max={100}
+        markers={demoMarkers}
+        onChange={setValue}
+        formatValue={(value) => `$${value}`}
+      />
+      <pre>{JSON.stringify({ values: value }, null, 2)}</pre>
+    </DemoContainer>
+  )
+}
+
 export default { title: 'Slider' }
-export { Basic, WithStep, WithMarkers }
+export { Basic, WithStep, WithMarkers, WithCustomValueFormat }
