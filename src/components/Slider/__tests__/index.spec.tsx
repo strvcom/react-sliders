@@ -12,14 +12,14 @@ const renderSlider = (propOverrides: Partial<ISliderProps> = {}) => {
     return wrapper.getByTestId('slider-track')
   }
 
-  const getThumbElement = () => {
-    return wrapper.getByTestId('slider-thumb')
+  const getHandleElement = () => {
+    return wrapper.getByTestId('slider-handle')
   }
 
   return {
     ...wrapper,
     getTrackElement,
-    getThumbElement,
+    getHandleElement,
   }
 }
 
@@ -29,13 +29,13 @@ describe('<Slider />', () => {
   })
 
   it('should render a Range Slider with properly positioned thumbs and track', async () => {
-    const { getTrackElement, getThumbElement } = renderSlider()
+    const { getTrackElement, getHandleElement } = renderSlider()
 
     const trackElement = getTrackElement()
-    const thumbElement = getThumbElement()
+    const handleElement = getHandleElement()
 
     expect(trackElement).toHaveStyle('width: 50%')
-    expect(thumbElement).toHaveStyle('left: 50%')
+    expect(handleElement).toHaveStyle('left: 50%')
   })
 
   it('should render Range Slider markers', () => {
@@ -55,19 +55,19 @@ describe('<Slider />', () => {
     it.skip('should trigger onChange with appropriate data when moving with min thumb', () => {
       const onChangeSpy = jest.fn()
 
-      const { getThumbElement } = renderSlider({
+      const { getHandleElement } = renderSlider({
         min: 0,
         max: 100,
         value: 0,
         onChange: onChangeSpy,
       })
 
-      const thumbElement = getThumbElement()
+      const handleElement = getHandleElement()
 
       act(() => {
-        fireEvent.mouseDown(thumbElement, { clientX: 0 })
-        fireEvent.mouseMove(thumbElement, { clientX: 50 })
-        fireEvent.mouseUp(thumbElement)
+        fireEvent.mouseDown(handleElement, { clientX: 0 })
+        fireEvent.mouseMove(handleElement, { clientX: 50 })
+        fireEvent.mouseUp(handleElement)
       })
 
       expect(onChangeSpy).toHaveBeenCalledWith([10, 100])

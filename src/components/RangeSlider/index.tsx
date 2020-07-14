@@ -4,7 +4,7 @@ import {
   SliderContainer,
   SliderRail,
   SliderTrack,
-  SliderThumb,
+  SliderHandle,
   SliderMarker,
   SliderMarkerLabel,
 } from '../styled'
@@ -61,8 +61,8 @@ const RangeSlider: React.FC<IRangeSliderProps> = ({
         )
       })}
 
-      <SliderThumb data-testid="range-slider-min-thumb" {...getMinHandleProps()} />
-      <SliderThumb data-testid="range-slider-max-thumb" {...getMaxHandleProps()} />
+      <SliderHandle data-testid="range-slider-min-handle" {...getMinHandleProps()} />
+      <SliderHandle data-testid="range-slider-max-handle" {...getMaxHandleProps()} />
     </SliderContainer>
   )
 }

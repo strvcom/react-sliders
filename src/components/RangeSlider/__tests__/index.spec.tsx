@@ -12,19 +12,19 @@ const renderRangeSlider = (propOverrides: Partial<IRangeSliderProps> = {}) => {
     return wrapper.getByTestId('range-slider-track')
   }
 
-  const getMinThumbElement = () => {
-    return wrapper.getByTestId('range-slider-min-thumb')
+  const getMinHandleElement = () => {
+    return wrapper.getByTestId('range-slider-min-handle')
   }
 
-  const getMaxThumbElement = () => {
-    return wrapper.getByTestId('range-slider-max-thumb')
+  const getMaxHandleElement = () => {
+    return wrapper.getByTestId('range-slider-max-handle')
   }
 
   return {
     ...wrapper,
     getTrackElement,
-    getMinThumbElement,
-    getMaxThumbElement,
+    getMinHandleElement,
+    getMaxHandleElement,
   }
 }
 
@@ -34,18 +34,18 @@ describe('<RangeSlider />', () => {
   })
 
   it('should render a Range Slider with properly positioned thumbs and track', async () => {
-    const { getTrackElement, getMinThumbElement, getMaxThumbElement } = renderRangeSlider()
+    const { getTrackElement, getMinHandleElement, getMaxHandleElement } = renderRangeSlider()
 
     const trackElement = getTrackElement()
-    const minThumbElement = getMinThumbElement()
-    const maxThumbElement = getMaxThumbElement()
+    const minHandleElement = getMinHandleElement()
+    const maxHandleElement = getMaxHandleElement()
 
     expect(trackElement).toHaveStyle({
       left: '30%',
       width: 'calc(70% - 30%)',
     })
-    expect(minThumbElement).toHaveStyle('left: 30%')
-    expect(maxThumbElement).toHaveStyle('left: 70%')
+    expect(minHandleElement).toHaveStyle('left: 30%')
+    expect(maxHandleElement).toHaveStyle('left: 70%')
   })
 
   it('should render Range Slider markers', () => {
@@ -65,19 +65,19 @@ describe('<RangeSlider />', () => {
     it.skip('should trigger onChange with appropriate data when moving with min thumb', () => {
       const onChangeSpy = jest.fn()
 
-      const { getMinThumbElement } = renderRangeSlider({
+      const { getMinHandleElement } = renderRangeSlider({
         min: 0,
         max: 100,
         value: [0, 100],
         onChange: onChangeSpy,
       })
 
-      const minThumbElement = getMinThumbElement()
+      const minHandleElement = getMinHandleElement()
 
       act(() => {
-        fireEvent.mouseDown(minThumbElement, { clientX: 0 })
-        fireEvent.mouseMove(minThumbElement, { clientX: 50 })
-        fireEvent.mouseUp(minThumbElement)
+        fireEvent.mouseDown(minHandleElement, { clientX: 0 })
+        fireEvent.mouseMove(minHandleElement, { clientX: 50 })
+        fireEvent.mouseUp(minHandleElement)
       })
 
       expect(onChangeSpy).toHaveBeenCalledWith([10, 100])
