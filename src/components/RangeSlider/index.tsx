@@ -4,7 +4,7 @@ import {
   SliderContainer,
   SliderRail,
   SliderTrack,
-  SliderThumb,
+  SliderHandle,
   SliderMarker,
   SliderMarkerLabel,
 } from '../styled'
@@ -13,7 +13,7 @@ import { useRangeSlider } from 'hooks/useRangeSlider'
 
 import { IRangeMarker, TRangeTuple } from 'types'
 
-export interface IRangeSlider {
+export interface IRangeSliderProps {
   value: TRangeTuple
   min: number
   max: number
@@ -23,7 +23,7 @@ export interface IRangeSlider {
   markers?: IRangeMarker[]
 }
 
-const RangeSlider: React.FC<IRangeSlider> = ({
+const RangeSlider: React.FC<IRangeSliderProps> = ({
   value,
   max,
   min,
@@ -61,8 +61,8 @@ const RangeSlider: React.FC<IRangeSlider> = ({
         )
       })}
 
-      <SliderThumb data-testid="range-slider-min-thumb" {...getMinHandleProps()} />
-      <SliderThumb data-testid="range-slider-max-thumb" {...getMaxHandleProps()} />
+      <SliderHandle data-testid="range-slider-min-handle" {...getMinHandleProps()} />
+      <SliderHandle data-testid="range-slider-max-handle" {...getMaxHandleProps()} />
     </SliderContainer>
   )
 }

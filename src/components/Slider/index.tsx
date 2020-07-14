@@ -4,7 +4,7 @@ import {
   SliderContainer,
   SliderRail,
   SliderTrack,
-  SliderThumb,
+  SliderHandle,
   SliderMarkerLabel,
   SliderMarker,
 } from '../styled'
@@ -48,7 +48,7 @@ const Slider: React.FC<ISliderProps> = ({ value, min, max, onChange, step, marke
         )
       })}
 
-      <SliderThumb data-testid="slider-thumb" {...getHandleProps()} />
+      <SliderHandle data-testid="slider-handle" {...getHandleProps()} />
     </SliderContainer>
   )
 }

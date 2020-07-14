@@ -35,7 +35,7 @@ const SliderTrack = styled.span`
   border-radius: 0.1rem;
 `
 
-const SliderThumb = styled.span`
+const SliderHandle = styled.span`
   position: absolute;
   cursor: pointer;
   width: 2.4rem;
@@ -97,4 +97,4 @@ const SliderMarkerLabel = styled.span`
   }
 `
 
-export { SliderContainer, SliderRail, SliderTrack, SliderThumb, SliderMarker, SliderMarkerLabel }
+export { SliderContainer, SliderRail, SliderTrack, SliderHandle, SliderMarker, SliderMarkerLabel }
