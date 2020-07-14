@@ -13,7 +13,7 @@ import { useRangeSlider } from 'hooks/useRangeSlider'
 
 import { IRangeMarker, TRangeTuple } from 'types'
 
-export interface IRangeSlider {
+export interface IRangeSliderProps {
   value: TRangeTuple
   min: number
   max: number
@@ -23,7 +23,7 @@ export interface IRangeSlider {
   markers?: IRangeMarker[]
 }
 
-const RangeSlider: React.FC<IRangeSlider> = ({
+const RangeSlider: React.FC<IRangeSliderProps> = ({
   value,
   max,
   min,

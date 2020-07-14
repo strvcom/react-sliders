@@ -1,9 +1,9 @@
 import React from 'react'
 import { render, fireEvent, act } from '@testing-library/react'
 
-import { RangeSlider, IRangeSlider } from '..'
+import { RangeSlider, IRangeSliderProps } from '..'
 
-const renderRangeSlider = (propOverrides: Partial<IRangeSlider> = {}) => {
+const renderRangeSlider = (propOverrides: Partial<IRangeSliderProps> = {}) => {
   const wrapper = render(
     <RangeSlider min={0} max={100} value={[30, 70]} onChange={() => {}} {...propOverrides} />
   )
