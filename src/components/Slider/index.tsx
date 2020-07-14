@@ -7,12 +7,13 @@ import {
   SliderThumb,
   SliderMarkerLabel,
   SliderMarker,
-} from 'components/styled'
+} from '../styled'
+
 import { useSlider } from 'hooks/useSlider'
 
 import { IRangeMarker } from 'types'
 
-interface ISliderProps {
+export interface ISliderProps {
   value: number
   min: number
   max: number
@@ -40,12 +41,10 @@ const Slider: React.FC<ISliderProps> = ({ value, min, max, onChange, step, marke
         const { style, isInRange } = getMarkerProps(marker)
 
         return (
-          <>
-            <SliderMarkerLabel key={`marker-label-${marker.label}`} style={style}>
-              {marker.label}
-            </SliderMarkerLabel>
-            <SliderMarker key={`marker-${marker.label}`} isInRange={isInRange} style={style} />
-          </>
+          <React.Fragment key={`marker-${marker.label}`}>
+            <SliderMarkerLabel style={style}>{marker.label}</SliderMarkerLabel>
+            <SliderMarker isInRange={isInRange} style={style} />
+          </React.Fragment>
         )
       })}
 

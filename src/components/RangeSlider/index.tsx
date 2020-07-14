@@ -7,7 +7,8 @@ import {
   SliderThumb,
   SliderMarker,
   SliderMarkerLabel,
-} from 'components/styled'
+} from '../styled'
+
 import { useRangeSlider } from 'hooks/useRangeSlider'
 
 import { IRangeMarker, TRangeTuple } from 'types'
@@ -53,12 +54,10 @@ const RangeSlider: React.FC<IRangeSlider> = ({
         const { style, isInRange } = getMarkerProps(marker)
 
         return (
-          <>
-            <SliderMarkerLabel key={`marker-label-${marker.label}`} style={style}>
-              {marker.label}
-            </SliderMarkerLabel>
-            <SliderMarker key={`marker-${marker.label}`} isInRange={isInRange} style={style} />
-          </>
+          <React.Fragment key={`marker-${marker.label}`}>
+            <SliderMarkerLabel style={style}>{marker.label}</SliderMarkerLabel>
+            <SliderMarker isInRange={isInRange} style={style} />
+          </React.Fragment>
         )
       })}
 
