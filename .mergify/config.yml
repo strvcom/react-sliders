@@ -1,14 +1,14 @@
 pull_request_rules:
-  - name: Merge my PRs when CI/CD passes
+  - name: Merge PRs when CI/CD passes and is reviewed
     conditions:
-      - author=xhudec
+      - '#approved-reviews-by>=1'
       - status-success=build
       - label!=Work in progress ⚠️
       - base=master
     actions:
       merge:
         method: squash
-  - name: Merge pull requests from dependabot if CI passes
+  - name: Merge PRs from dependabot if CI passes
     conditions:
       - author~=^dependabot(|-preview)\[bot\]$
       - status-success=build

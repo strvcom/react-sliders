@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "name": "react-sliders",
+  "name": "@strv/react-sliders",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -12,7 +12,7 @@
     "dist",
     "src"
   ],
-  "author": "Lukas Hudec <hudec.luke@gmail.com>",
+  "author": "Lukas Hudec <lukas.hudec@strv.com>",
   "scripts": {
     "dev": "tsdx watch",
     "build": "tsdx build",
@@ -25,7 +25,9 @@
     "test": "is-ci \"test:coverage\" \"test:watch\"",
     "test:watch": "tsdx test --watch --verbose --env=jest-environment-jsdom-sixteen",
     "test:coverage": "tsdx test --coverage --env=jest-environment-jsdom-sixteen",
-    "analyze:bundle": "source-map-explorer dist/*.js"
+    "analyze:bundle": "source-map-explorer dist/*.js",
+    "changelog": "perfekt changelog",
+    "publish": "perfekt release"
   },
   "peerDependencies": {
     "react": ">=16"
@@ -50,6 +52,7 @@
     "husky": "^4.2.5",
     "is-ci-cli": "^2.1.2",
     "jest-environment-jsdom-sixteen": "^1.0.3",
+    "perfekt": "^1.2.0",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
     "react": "^16.13.1",

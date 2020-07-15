@@ -1,8 +1,10 @@
-# `react-sliders`
+# `@strv/react-sliders`
 
 ![CI](https://github.com/xhudec/react-sliders/workflows/CI/badge.svg)
 ![Dependabot](https://flat.badgen.net/dependabot/xhudec/react-sliders?icon=dependabot)
 [![Mergify Status][mergify-status]][mergify]
+[![management: perfekt👌](https://img.shields.io/badge/management-perfekt👌-red.svg?style=flat-square)](https://github.com/lekterable/perfekt)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 [mergify]: https://mergify.io
 [mergify-status]: https://img.shields.io/endpoint.svg?url=https://gh.mergify.io/badges/xhudec/react-sliders&style=flat
@@ -13,12 +15,11 @@ This project was bootstrapped with [`TSDX`](https://github.com/formik/tsdx).
 
 1. Customizable & CSS agnostic
    - **Modules**
-     - `RangeSlider`, `Slider` (Ready to use, pre-styled components)
      - `useRangeSlider`, `useSlider` (Hooks, which encapsulates the core logic and let consumers style their own sliders as they wish)
    - **Headless** (Inspiration [`react-table`](https://github.com/tannerlinsley/react-table), [`downshift-js`](https://github.com/downshift-js/downshift))
 2. A11y
    - Full mouse & touch support
-   - Keyboard support
+   - [Keyboard support](https://www.w3.org/TR/wai-aria-practices/examples/slider/slider-1.html)
 3. API that is easy to use & integrate
    - with forms, ...
 4. Tree-shakeable & Optimized bundle
