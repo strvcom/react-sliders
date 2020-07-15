@@ -1,6 +1,6 @@
 {
   "version": "0.1.0",
-  "name": "react-sliders",
+  "name": "@strv/react-sliders",
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -12,7 +12,7 @@
     "dist",
     "src"
   ],
-  "author": "Lukas Hudec <hudec.luke@gmail.com>",
+  "author": "Lukas Hudec <lukas.hudec@strv.com>",
   "scripts": {
     "dev": "tsdx watch",
     "build": "tsdx build",
