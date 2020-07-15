@@ -3,6 +3,8 @@
 ![CI](https://github.com/xhudec/react-sliders/workflows/CI/badge.svg)
 ![Dependabot](https://flat.badgen.net/dependabot/xhudec/react-sliders?icon=dependabot)
 [![Mergify Status][mergify-status]][mergify]
+[![management: perfekt👌](https://img.shields.io/badge/management-perfekt👌-red.svg?style=flat-square)](https://github.com/lekterable/perfekt)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
 [mergify]: https://mergify.io
 [mergify-status]: https://img.shields.io/endpoint.svg?url=https://gh.mergify.io/badges/xhudec/react-sliders&style=flat
