@@ -15,12 +15,11 @@ This project was bootstrapped with [`TSDX`](https://github.com/formik/tsdx).
 
 1. Customizable & CSS agnostic
    - **Modules**
-     - `RangeSlider`, `Slider` (Ready to use, pre-styled components)
      - `useRangeSlider`, `useSlider` (Hooks, which encapsulates the core logic and let consumers style their own sliders as they wish)
    - **Headless** (Inspiration [`react-table`](https://github.com/tannerlinsley/react-table), [`downshift-js`](https://github.com/downshift-js/downshift))
 2. A11y
    - Full mouse & touch support
-   - Keyboard support
+   - [Keyboard support](https://www.w3.org/TR/wai-aria-practices/examples/slider/slider-1.html)
 3. API that is easy to use & integrate
    - with forms, ...
 4. Tree-shakeable & Optimized bundle
