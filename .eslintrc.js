@@ -18,7 +18,7 @@ module.exports = {
     tsconfigRootDir: __dirname,
     project: ['./tsconfig.json'],
   },
-  ignorePatterns: ['example/*', '.eslintrc.js', 'jest.config.js'],
+  ignorePatterns: ['examples/*', '.eslintrc.js', 'jest.config.js'],
   env: {
     'jest/globals': true,
   },
@@ -53,6 +53,7 @@ module.exports = {
     ],
 
     'react/prop-types': 'off',
+    'react/require-default-props': 'off',
     'no-shadow': 'off',
     'import/exports-last': 'off',
     'import/group-exports': 'off',

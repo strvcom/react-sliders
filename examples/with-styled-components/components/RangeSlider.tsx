@@ -1,51 +1,54 @@
-import React from 'react'
+import * as React from 'react'
 
 import {
   SliderContainer,
   SliderRail,
   SliderTrack,
   SliderHandle,
-  SliderMarkerLabel,
   SliderMarker,
-} from '../styled'
+  SliderMarkerLabel,
+} from '../styles'
 
-import { useSlider } from 'hooks/useSlider'
+import { useRangeSlider, IRangeMarker, TRangeTuple } from '../../../dist'
 
-import { IRangeMarker } from 'types'
-
-export interface ISliderProps {
-  value: number
+export interface IRangeSliderProps {
+  value: TRangeTuple
   min: number
   max: number
-  onChange: (value: number) => void
+  onChange: (range: TRangeTuple) => void
 
   step?: number
   markers?: IRangeMarker[]
   formatValue?: (value: number) => string
 }
 
-const Slider: React.FC<ISliderProps> = ({
+const RangeSlider: React.FC<IRangeSliderProps> = ({
   value,
-  min,
   max,
-  onChange,
+  min,
+  onChange = () => {},
   step,
   markers,
   formatValue,
 }) => {
-  const { getRailProps, getTrackProps, getHandleProps, getMarkerProps } = useSlider({
+  const {
+    getRailProps,
+    getTrackProps,
+    getMinHandleProps,
+    getMaxHandleProps,
+    getMarkerProps,
+  } = useRangeSlider({
     value,
-    min,
     max,
+    min,
     onChange,
     step,
-    formatValue,
   })
 
   return (
     <SliderContainer>
       <SliderRail {...getRailProps()} />
-      <SliderTrack data-testid="slider-track" {...getTrackProps()} />
+      <SliderTrack {...getTrackProps()} />
 
       {markers?.map((marker) => {
         const { style, isInRange } = getMarkerProps(marker)
@@ -60,9 +63,10 @@ const Slider: React.FC<ISliderProps> = ({
         )
       })}
 
-      <SliderHandle data-testid="slider-handle" {...getHandleProps()} />
+      <SliderHandle {...getMinHandleProps()} />
+      <SliderHandle {...getMaxHandleProps()} />
     </SliderContainer>
   )
 }
 
-export { Slider }
+export { RangeSlider }

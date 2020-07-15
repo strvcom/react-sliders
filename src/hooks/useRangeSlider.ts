@@ -9,7 +9,7 @@ import {
   clamp,
   roundValueToStep,
   isInRange,
-} from 'utils'
+} from '../utils'
 
 const DEFAULT_STEP = 1
 

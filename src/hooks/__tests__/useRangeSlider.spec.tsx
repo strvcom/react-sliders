@@ -1,7 +1,58 @@
 import React from 'react'
 import { render, fireEvent, act } from '@testing-library/react'
 
-import { RangeSlider, IRangeSliderProps } from '..'
+import { useRangeSlider, IUseRangeSlider } from '../useRangeSlider'
+import { IRangeMarker } from '../../types'
+
+interface IRangeSliderProps extends IUseRangeSlider {
+  markers?: IRangeMarker[]
+}
+
+const RangeSlider = ({
+  value,
+  min,
+  max,
+  onChange,
+  step,
+  markers,
+  formatValue,
+}: IRangeSliderProps) => {
+  const {
+    getRailProps,
+    getTrackProps,
+    getMarkerProps,
+    getMinHandleProps,
+    getMaxHandleProps,
+  } = useRangeSlider({ value, min, max, onChange, step, formatValue })
+
+  return (
+    <div className="range-slider-container">
+      <span className="range-slider-rail" {...getRailProps()} />
+      <span className="range-slider-track" data-testid="range-slider-track" {...getTrackProps()} />
+
+      {markers?.map((marker) => {
+        const { style } = getMarkerProps(marker)
+
+        return (
+          <span key={`marker-${marker.value}`} className="range-slider-marker" style={style}>
+            {marker.label ?? (formatValue ? formatValue(marker.value) : marker.value)}
+          </span>
+        )
+      })}
+
+      <span
+        className="range-slider-handle"
+        data-testid="range-slider-min-handle"
+        {...getMinHandleProps()}
+      />
+      <span
+        className="range-slider-handle"
+        data-testid="range-slider-max-handle"
+        {...getMaxHandleProps()}
+      />
+    </div>
+  )
+}
 
 const renderRangeSlider = (propOverrides: Partial<IRangeSliderProps> = {}) => {
   const wrapper = render(
@@ -28,12 +79,12 @@ const renderRangeSlider = (propOverrides: Partial<IRangeSliderProps> = {}) => {
   }
 }
 
-describe('<RangeSlider />', () => {
+describe('useRangeSlider', () => {
   it('should be defined', () => {
-    expect(RangeSlider).toBeDefined()
+    expect(useRangeSlider).toBeDefined()
   })
 
-  it('should render a Range Slider with properly positioned thumbs and track', async () => {
+  it('should render a Range Slider with properly positioned thumbs and track', () => {
     const { getTrackElement, getMinHandleElement, getMaxHandleElement } = renderRangeSlider()
 
     const trackElement = getTrackElement()
