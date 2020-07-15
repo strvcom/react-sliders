@@ -1,7 +1,5 @@
 import React from 'react'
 
-import { KeyCodes, IRangeMarker } from '../types'
-
 import {
   calculatePercentage,
   percentageToValue,
@@ -9,7 +7,9 @@ import {
   clamp,
   roundValueToStep,
   isInRange,
-} from 'utils'
+} from '../utils'
+
+import { KeyCodes, IRangeMarker } from '../types'
 
 const DEFAULT_STEP = 1
 

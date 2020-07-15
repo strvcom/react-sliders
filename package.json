@@ -25,8 +25,6 @@
     "test": "is-ci \"test:coverage\" \"test:watch\"",
     "test:watch": "tsdx test --watch --verbose --env=jest-environment-jsdom-sixteen",
     "test:coverage": "tsdx test --coverage --env=jest-environment-jsdom-sixteen",
-    "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook",
     "analyze:bundle": "source-map-explorer dist/*.js"
   },
   "peerDependencies": {
@@ -35,12 +33,6 @@
   "devDependencies": {
     "@babel/core": "^7.10.4",
     "@commitlint/cli": "^9.1.1",
-    "@storybook/addon-actions": "^5.3.19",
-    "@storybook/addon-docs": "^5.3.19",
-    "@storybook/addon-info": "^5.3.19",
-    "@storybook/addon-links": "^5.3.19",
-    "@storybook/addons": "^5.3.19",
-    "@storybook/react": "^5.3.19",
     "@strv/commitlint-config": "^1.1.0",
     "@strv/eslint-config-react": "^3.1.2",
     "@strv/eslint-config-typescript": "^2.3.0",
@@ -69,8 +61,5 @@
     "tsdx": "^0.13.2",
     "tslib": "^2.0.0",
     "typescript": "^3.9.6"
-  },
-  "dependencies": {
-    "styled-components": "^5.1.1"
   }
 }
