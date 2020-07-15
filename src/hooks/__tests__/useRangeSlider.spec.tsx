@@ -1,86 +1,137 @@
-// import React from 'react'
-// import { render, fireEvent, act } from '@testing-library/react'
+import React from 'react'
+import { render, fireEvent, act } from '@testing-library/react'
 
-// import { RangeSlider, IRangeSliderProps } from '../../../examples/basic/components/RangeSlider'
+import { useRangeSlider, IUseRangeSlider } from '../useRangeSlider'
+import { IRangeMarker } from '../../types'
 
-// const renderRangeSlider = (propOverrides: Partial<IRangeSliderProps> = {}) => {
-//   const wrapper = render(
-//     <RangeSlider min={0} max={100} value={[30, 70]} onChange={() => {}} {...propOverrides} />
-//   )
+interface IRangeSliderProps extends IUseRangeSlider {
+  markers?: IRangeMarker[]
+}
 
-//   const getTrackElement = () => {
-//     return wrapper.getByTestId('range-slider-track')
-//   }
+const RangeSlider = ({
+  value,
+  min,
+  max,
+  onChange,
+  step,
+  markers,
+  formatValue,
+}: IRangeSliderProps) => {
+  const {
+    getRailProps,
+    getTrackProps,
+    getMarkerProps,
+    getMinHandleProps,
+    getMaxHandleProps,
+  } = useRangeSlider({ value, min, max, onChange, step, formatValue })
 
-//   const getMinHandleElement = () => {
-//     return wrapper.getByTestId('range-slider-min-handle')
-//   }
+  return (
+    <div className="range-slider-container">
+      <span className="range-slider-rail" {...getRailProps()} />
+      <span className="range-slider-track" data-testid="range-slider-track" {...getTrackProps()} />
 
-//   const getMaxHandleElement = () => {
-//     return wrapper.getByTestId('range-slider-max-handle')
-//   }
+      {markers?.map((marker) => {
+        const { style } = getMarkerProps(marker)
 
-//   return {
-//     ...wrapper,
-//     getTrackElement,
-//     getMinHandleElement,
-//     getMaxHandleElement,
-//   }
-// }
+        return (
+          <span key={`marker-${marker.value}`} className="range-slider-marker" style={style}>
+            {marker.label ?? (formatValue ? formatValue(marker.value) : marker.value)}
+          </span>
+        )
+      })}
 
-// describe('<RangeSlider />', () => {
-//   it('should be defined', () => {
-//     expect(RangeSlider).toBeDefined()
-//   })
+      <span
+        className="range-slider-handle"
+        data-testid="range-slider-min-handle"
+        {...getMinHandleProps()}
+      />
+      <span
+        className="range-slider-handle"
+        data-testid="range-slider-max-handle"
+        {...getMaxHandleProps()}
+      />
+    </div>
+  )
+}
 
-//   it('should render a Range Slider with properly positioned thumbs and track', async () => {
-//     const { getTrackElement, getMinHandleElement, getMaxHandleElement } = renderRangeSlider()
+const renderRangeSlider = (propOverrides: Partial<IRangeSliderProps> = {}) => {
+  const wrapper = render(
+    <RangeSlider min={0} max={100} value={[30, 70]} onChange={() => {}} {...propOverrides} />
+  )
 
-//     const trackElement = getTrackElement()
-//     const minHandleElement = getMinHandleElement()
-//     const maxHandleElement = getMaxHandleElement()
+  const getTrackElement = () => {
+    return wrapper.getByTestId('range-slider-track')
+  }
 
-//     expect(trackElement).toHaveStyle({
-//       left: '30%',
-//       width: 'calc(70% - 30%)',
-//     })
-//     expect(minHandleElement).toHaveStyle('left: 30%')
-//     expect(maxHandleElement).toHaveStyle('left: 70%')
-//   })
+  const getMinHandleElement = () => {
+    return wrapper.getByTestId('range-slider-min-handle')
+  }
 
-//   it('should render Range Slider markers', () => {
-//     const { getByText } = renderRangeSlider({
-//       markers: [
-//         { value: 0, label: '$0' },
-//         { value: 100, label: '$100' },
-//       ],
-//     })
+  const getMaxHandleElement = () => {
+    return wrapper.getByTestId('range-slider-max-handle')
+  }
 
-//     getByText('$0')
-//     getByText('$100')
-//   })
+  return {
+    ...wrapper,
+    getTrackElement,
+    getMinHandleElement,
+    getMaxHandleElement,
+  }
+}
 
-//   describe('user interaction', () => {
-//     // TODO: find out how to set container size in testing environment
-//     it.skip('should trigger onChange with appropriate data when moving with min thumb', () => {
-//       const onChangeSpy = jest.fn()
+describe('<RangeSlider />', () => {
+  it('should be defined', () => {
+    expect(RangeSlider).toBeDefined()
+  })
 
-//       const { getMinHandleElement } = renderRangeSlider({
-//         min: 0,
-//         max: 100,
-//         value: [0, 100],
-//         onChange: onChangeSpy,
-//       })
+  it('should render a Range Slider with properly positioned thumbs and track', async () => {
+    const { getTrackElement, getMinHandleElement, getMaxHandleElement } = renderRangeSlider()
 
-//       const minHandleElement = getMinHandleElement()
+    const trackElement = getTrackElement()
+    const minHandleElement = getMinHandleElement()
+    const maxHandleElement = getMaxHandleElement()
 
-//       act(() => {
-//         fireEvent.mouseDown(minHandleElement, { clientX: 0 })
-//         fireEvent.mouseMove(minHandleElement, { clientX: 50 })
-//         fireEvent.mouseUp(minHandleElement)
-//       })
+    expect(trackElement).toHaveStyle({
+      left: '30%',
+      width: 'calc(70% - 30%)',
+    })
+    expect(minHandleElement).toHaveStyle('left: 30%')
+    expect(maxHandleElement).toHaveStyle('left: 70%')
+  })
 
-//       expect(onChangeSpy).toHaveBeenCalledWith([10, 100])
-//     })
-//   })
-// })
+  it('should render Range Slider markers', () => {
+    const { getByText } = renderRangeSlider({
+      markers: [
+        { value: 0, label: '$0' },
+        { value: 100, label: '$100' },
+      ],
+    })
+
+    getByText('$0')
+    getByText('$100')
+  })
+
+  describe('user interaction', () => {
+    // TODO: find out how to set container size in testing environment
+    it.skip('should trigger onChange with appropriate data when moving with min thumb', () => {
+      const onChangeSpy = jest.fn()
+
+      const { getMinHandleElement } = renderRangeSlider({
+        min: 0,
+        max: 100,
+        value: [0, 100],
+        onChange: onChangeSpy,
+      })
+
+      const minHandleElement = getMinHandleElement()
+
+      act(() => {
+        fireEvent.mouseDown(minHandleElement, { clientX: 0 })
+        fireEvent.mouseMove(minHandleElement, { clientX: 50 })
+        fireEvent.mouseUp(minHandleElement)
+      })
+
+      expect(onChangeSpy).toHaveBeenCalledWith([10, 100])
+    })
+  })
+})

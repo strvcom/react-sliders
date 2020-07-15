@@ -53,6 +53,7 @@ module.exports = {
     ],
 
     'react/prop-types': 'off',
+    'react/require-default-props': 'off',
     'no-shadow': 'off',
     'import/exports-last': 'off',
     'import/group-exports': 'off',
