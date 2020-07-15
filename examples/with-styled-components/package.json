@@ -8,13 +8,10 @@
     "build": "parcel build index.html"
   },
   "dependencies": {
+    "react": "^16.13.1",
     "react-app-polyfill": "^1.0.0",
+    "react-dom": "^16.13.1",
     "styled-components": "^5.1.1"
-  },
-  "alias": {
-    "react": "../../node_modules/react",
-    "react-dom": "../../node_modules/react-dom/profiling",
-    "scheduler/tracing": "../../node_modules/scheduler/tracing-profiling"
   },
   "devDependencies": {
     "@types/react": "^16.9.11",
