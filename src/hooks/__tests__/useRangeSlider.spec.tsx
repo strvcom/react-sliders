@@ -79,12 +79,12 @@ const renderRangeSlider = (propOverrides: Partial<IRangeSliderProps> = {}) => {
   }
 }
 
-describe('<RangeSlider />', () => {
+describe('useRangeSlider', () => {
   it('should be defined', () => {
-    expect(RangeSlider).toBeDefined()
+    expect(useRangeSlider).toBeDefined()
   })
 
-  it('should render a Range Slider with properly positioned thumbs and track', async () => {
+  it('should render a Range Slider with properly positioned thumbs and track', () => {
     const { getTrackElement, getMinHandleElement, getMaxHandleElement } = renderRangeSlider()
 
     const trackElement = getTrackElement()

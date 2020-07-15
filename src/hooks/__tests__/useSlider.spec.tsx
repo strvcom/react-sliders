@@ -1,76 +1,119 @@
-// import React from 'react'
-// import { render, fireEvent, act } from '@testing-library/react'
+import React from 'react'
+import { render, fireEvent, act } from '@testing-library/react'
 
-// import { Slider, ISliderProps } from '../../components/Slider'
+import { IUseSlider, useSlider } from '../useSlider'
+import { IRangeMarker } from '../../types'
 
-// const renderSlider = (propOverrides: Partial<ISliderProps> = {}) => {
-//   const wrapper = render(
-//     <Slider min={0} max={100} value={50} onChange={() => {}} {...propOverrides} />
-//   )
+interface ISliderProps extends IUseSlider {
+  markers?: IRangeMarker[]
+}
 
-//   const getTrackElement = () => {
-//     return wrapper.getByTestId('slider-track')
-//   }
+const Slider: React.FC<ISliderProps> = ({
+  value,
+  min,
+  max,
+  step,
+  onChange,
+  markers,
+  formatValue,
+}) => {
+  const { getRailProps, getTrackProps, getHandleProps, getMarkerProps } = useSlider({
+    value,
+    min,
+    max,
+    step,
+    onChange,
+    formatValue,
+  })
 
-//   const getHandleElement = () => {
-//     return wrapper.getByTestId('slider-handle')
-//   }
+  return (
+    <div className="slider-container">
+      <span className="slider-rail" {...getRailProps()} />
+      <span className="slider-track" data-testid="slider-track" {...getTrackProps()} />
 
-//   return {
-//     ...wrapper,
-//     getTrackElement,
-//     getHandleElement,
-//   }
-// }
+      {markers?.map((marker) => {
+        const { style } = getMarkerProps(marker)
 
-// describe('<Slider />', () => {
-//   it('should be defined', () => {
-//     expect(Slider).toBeDefined()
-//   })
+        return (
+          <span key={`marker-${marker.value}`} className="slider-marker" style={style}>
+            {marker.label ?? (formatValue ? formatValue(marker.value) : marker.value)}
+          </span>
+        )
+      })}
 
-//   it('should render a Range Slider with properly positioned thumbs and track', async () => {
-//     const { getTrackElement, getHandleElement } = renderSlider()
+      <span className="slider-handle" data-testid="slider-handle" {...getHandleProps()} />
+    </div>
+  )
+}
 
-//     const trackElement = getTrackElement()
-//     const handleElement = getHandleElement()
+const renderSlider = (propOverrides: Partial<ISliderProps> = {}) => {
+  const wrapper = render(
+    <Slider min={0} max={100} value={50} onChange={() => {}} {...propOverrides} />
+  )
 
-//     expect(trackElement).toHaveStyle('width: 50%')
-//     expect(handleElement).toHaveStyle('left: 50%')
-//   })
+  const getTrackElement = () => {
+    return wrapper.getByTestId('slider-track')
+  }
 
-//   it('should render Range Slider markers', () => {
-//     const { getByText } = renderSlider({
-//       markers: [
-//         { value: 0, label: '$0' },
-//         { value: 100, label: '$100' },
-//       ],
-//     })
+  const getHandleElement = () => {
+    return wrapper.getByTestId('slider-handle')
+  }
 
-//     getByText('$0')
-//     getByText('$100')
-//   })
+  return {
+    ...wrapper,
+    getTrackElement,
+    getHandleElement,
+  }
+}
 
-//   describe('user interaction', () => {
-//     // TODO: find out how to set container size in testing environment
-//     it.skip('should trigger onChange with appropriate data when moving with min thumb', () => {
-//       const onChangeSpy = jest.fn()
+describe('useSlider', () => {
+  it('should be defined', () => {
+    expect(useSlider).toBeDefined()
+  })
 
-//       const { getHandleElement } = renderSlider({
-//         min: 0,
-//         max: 100,
-//         value: 0,
-//         onChange: onChangeSpy,
-//       })
+  it('should render a Slider with properly positioned thumbs and track', () => {
+    const { getTrackElement, getHandleElement } = renderSlider()
 
-//       const handleElement = getHandleElement()
+    const trackElement = getTrackElement()
+    const handleElement = getHandleElement()
 
-//       act(() => {
-//         fireEvent.mouseDown(handleElement, { clientX: 0 })
-//         fireEvent.mouseMove(handleElement, { clientX: 50 })
-//         fireEvent.mouseUp(handleElement)
-//       })
+    expect(trackElement).toHaveStyle('width: 50%')
+    expect(handleElement).toHaveStyle('left: 50%')
+  })
 
-//       expect(onChangeSpy).toHaveBeenCalledWith([10, 100])
-//     })
-//   })
-// })
+  it('should render Slider markers', () => {
+    const { getByText } = renderSlider({
+      markers: [
+        { value: 0, label: '$0' },
+        { value: 100, label: '$100' },
+      ],
+    })
+
+    getByText('$0')
+    getByText('$100')
+  })
+
+  describe('user interaction', () => {
+    // TODO: find out how to set container size in testing environment
+    it.skip('should trigger onChange with appropriate data when moving with min thumb', () => {
+      const onChangeSpy = jest.fn()
+
+      const { getHandleElement } = renderSlider({
+        min: 0,
+        max: 100,
+        value: 0,
+        onChange: onChangeSpy,
+      })
+
+      const handleElement = getHandleElement()
+
+      act(() => {
+        fireEvent.mouseDown(handleElement, { clientX: 0 })
+        fireEvent.mouseMove(handleElement, { clientX: 50 })
+        fireEvent.mouseUp(handleElement)
+      })
+
+      expect(onChangeSpy).toHaveBeenCalledWith([10, 100])
+    })
+  })
+})
