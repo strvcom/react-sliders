@@ -33,7 +33,7 @@
     "react": ">=16"
   },
   "devDependencies": {
-    "@babel/core": "^7.10.4",
+    "@babel/core": "^7.10.5",
     "@commitlint/cli": "^9.1.1",
     "@strv/commitlint-config": "^1.1.0",
     "@strv/eslint-config-react": "^3.1.2",
