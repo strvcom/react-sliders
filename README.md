@@ -1,4 +1,4 @@
-# `react-sliders`
+# `@strv/react-sliders`
 
 ![CI](https://github.com/xhudec/react-sliders/workflows/CI/badge.svg)
 ![Dependabot](https://flat.badgen.net/dependabot/xhudec/react-sliders?icon=dependabot)
