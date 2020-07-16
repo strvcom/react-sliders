@@ -13,6 +13,10 @@
     "src"
   ],
   "author": "Lukas Hudec <lukas.hudec@strv.com>",
+  "contributors": [],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "dev": "tsdx watch",
     "build": "tsdx build",
