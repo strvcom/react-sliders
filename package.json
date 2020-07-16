@@ -10,7 +10,8 @@
   },
   "files": [
     "dist",
-    "src"
+    "LICENSE",
+    "README.md"
   ],
   "author": "Lukas Hudec <lukas.hudec@strv.com>",
   "contributors": [],
