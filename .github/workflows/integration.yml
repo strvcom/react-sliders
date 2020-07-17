@@ -1,18 +1,14 @@
-name: CI
+name: Continuous Integration
 
-on:
-  push:
-    branches:
-      - master
-  pull_request:
+on: [push, pull_request]
 
 env:
   CI: true
   NODE_VERSION: 12.x
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  verify:
+    runs-on: ubuntu-18.04
 
     steps:
       - name: Begin CI...
