@@ -40,7 +40,6 @@
 - [x] Fully typed with TypeScript
 - [x] Based on [our already existing open source tools](https://www.strv.io/tools/frontend)
   - [`code-quality-tools`](https://github.com/strvcom/code-quality-tools)
-  - [`perfekt`](https://github.com/lekterable/perfekt)
 
 ## Install
 
@@ -108,6 +107,8 @@ const SliderExample = () => {
   )
 }
 ```
+
+If you want so see more, head to the [list of existing CodeSandbox examples](examples/README.md).
 
 ### Hooks API
 

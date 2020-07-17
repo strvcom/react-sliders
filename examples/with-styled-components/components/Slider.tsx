@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useSlider, IRangeMarker } from '@strv/react-sliders'
 
 import {
   SliderContainer,
@@ -8,8 +9,6 @@ import {
   SliderMarkerLabel,
   SliderMarker,
 } from '../styles'
-
-import { useSlider, IRangeMarker } from '../../../dist'
 
 export interface ISliderProps {
   value: number

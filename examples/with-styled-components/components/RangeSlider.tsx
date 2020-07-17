@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useRangeSlider, IRangeMarker, TRangeTuple } from '@strv/react-sliders'
 
 import {
   SliderContainer,
@@ -8,8 +9,6 @@ import {
   SliderMarker,
   SliderMarkerLabel,
 } from '../styles'
-
-import { useRangeSlider, IRangeMarker, TRangeTuple } from '../../../dist'
 
 export interface IRangeSliderProps {
   value: TRangeTuple

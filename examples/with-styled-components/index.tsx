@@ -1,10 +1,10 @@
 import 'react-app-polyfill/ie11'
 import * as React from 'react'
 import * as ReactDOM from 'react-dom'
+import { TRangeTuple } from '@strv/react-sliders'
 
 import { Slider } from './components/Slider'
 import { RangeSlider } from './components/RangeSlider'
-import { TRangeTuple } from '../../dist'
 
 const markers = [
   { value: 0 },
