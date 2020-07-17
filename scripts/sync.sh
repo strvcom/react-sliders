@@ -1,6 +1,8 @@
 # Thank you @robertrossmann!
 # @see https://github.com/strvcom/heimdall/blob/3107d4ca279bb17dc0ac6d83a9b9549670075233/utils/ci/sync.sh
 
+# This script is triggered by CI after a successfull semantic-release. The purpose is to sync release commits back to master.
+
 #!/bin/sh
 
 set -o errexit
