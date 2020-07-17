@@ -36,7 +36,7 @@
 - [x] Tree-shakeable & Optimized bundle
   - out of the box thanks to [`TSDX`](https://github.com/formik/tsdx).
 - [ ] Properly tested
-- [ ] Well documented API with interactive examples on [CodeSandbox](https://codesandbox.io/)
+- [x] Well documented API with interactive examples on [CodeSandbox](https://codesandbox.io/)
 - [x] Fully typed with TypeScript
 - [x] Based on [our already existing open source tools](https://www.strv.io/tools/frontend)
   - [`code-quality-tools`](https://github.com/strvcom/code-quality-tools)
@@ -87,7 +87,7 @@ const SliderExample = () => {
 import React from 'react'
 import { useRangeSlider, TRangeTuple } from '@strv/react-sliders'
 
-const SliderExample = () => {
+const RangeSliderExample = () => {
   const [value, setValue] = React.useState<TRangeTuple>([0, 100])
   const { getRailProps, getTrackProps, getMinHandleProps, getMaxHandleProps } = useRangeSlider({
     value,
