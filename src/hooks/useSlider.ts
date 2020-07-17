@@ -206,8 +206,8 @@ const useSlider = ({ value, min, max, onChange, step = DEFAULT_STEP, formatValue
   )
 
   return {
-    getTrackProps,
     getRailProps,
+    getTrackProps,
     getHandleProps,
     getMarkerProps,
   }

@@ -11,11 +11,12 @@
 
 - [`@strv/react-sliders`](#strvreact-sliders)
   - [Features](#features)
+  - [Install](#install)
   - [Usage](#usage)
-    - [Install](#install)
-    - [API](#api)
+    - [Basic Examples](#basic-examples)
       - [`useSlider`](#useslider)
       - [`useRangeSlider`](#userangeslider)
+    - [Hooks API](#hooks-api)
   - [Related](#related)
     - [Contribution](#contribution)
     - [Authors](#authors)
@@ -41,9 +42,7 @@
   - [`code-quality-tools`](https://github.com/strvcom/code-quality-tools)
   - [`perfekt`](https://github.com/lekterable/perfekt)
 
-## Usage
-
-### Install
+## Install
 
 ```bash
 # npm
@@ -53,15 +52,67 @@ npm install @strv/react-sliders --save
 yarn add @strv/react-sliders
 ```
 
-### Hooks
+## Usage
+
+### Basic Examples
 
 #### `useSlider`
 
-_TODO_
+```tsx
+import React from 'react'
+import { useSlider } from '@strv/react-sliders'
+
+const SliderExample = () => {
+  const [value, setValue] = React.useState(0)
+  const { getRailProps, getTrackProps, getHandleProps } = useSlider({
+    value,
+    min: 0,
+    max: 100,
+    onChange: setValue,
+  })
+
+  return (
+    <div className="slider-container">
+      <span className="slider-rail" {...getRailProps()} />
+      <span className="slider-track" {...getTrackProps()} />
+
+      <span className="slider-handle" {...getHandleProps()} />
+    </div>
+  )
+}
+```
 
 #### `useRangeSlider`
 
-_TODO_
+```tsx
+import React from 'react'
+import { useRangeSlider, TRangeTuple } from '@strv/react-sliders'
+
+const SliderExample = () => {
+  const [value, setValue] = React.useState<TRangeTuple>([0, 100])
+  const { getRailProps, getTrackProps, getMinHandleProps, getMaxHandleProps } = useRangeSlider({
+    value,
+    min: 0,
+    max: 100,
+    onChange: setValue,
+  })
+
+  return (
+    <div className="range-slider-container">
+      <span className="range-slider-rail" {...getRailProps()} />
+      <span className="range-slider-track" {...getTrackProps()} />
+
+      <span className="range-slider-handle" {...getMinHandleProps()} />
+      <span className="range-slider-handle" {...getMaxHandleProps()} />
+    </div>
+  )
+}
+```
+
+### Hooks API
+
+- [`useSlider`](src/hooks/docs/useSlider.md)
+- [`useRangeSlider`](src/hooks/docs/useRangeSlider.md)
 
 ---
 
