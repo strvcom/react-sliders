@@ -9,10 +9,17 @@
     "node": ">=10"
   },
   "files": [
+    "src",
     "dist",
-    "src"
+    "LICENSE",
+    "README.md"
   ],
   "author": "Lukas Hudec <lukas.hudec@strv.com>",
+  "contributors": [],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
   "scripts": {
     "dev": "tsdx watch",
     "build": "tsdx build",
@@ -25,9 +32,7 @@
     "test": "is-ci \"test:coverage\" \"test:watch\"",
     "test:watch": "tsdx test --watch --verbose --env=jest-environment-jsdom-sixteen",
     "test:coverage": "tsdx test --coverage --env=jest-environment-jsdom-sixteen",
-    "analyze:bundle": "source-map-explorer dist/*.js",
-    "changelog": "perfekt changelog",
-    "publish": "perfekt release"
+    "analyze:bundle": "source-map-explorer dist/*.js"
   },
   "peerDependencies": {
     "react": ">=16"
@@ -35,6 +40,8 @@
   "devDependencies": {
     "@babel/core": "^7.10.5",
     "@commitlint/cli": "^9.1.1",
+    "@semantic-release/changelog": "^5.0.1",
+    "@semantic-release/git": "^9.0.0",
     "@strv/commitlint-config": "^1.1.0",
     "@strv/eslint-config-react": "^3.1.2",
     "@strv/eslint-config-typescript": "^2.3.0",
@@ -52,13 +59,13 @@
     "husky": "^4.2.5",
     "is-ci-cli": "^2.1.2",
     "jest-environment-jsdom-sixteen": "^1.0.3",
-    "perfekt": "^1.2.0",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
     "react": "^16.13.1",
     "react-docgen-typescript-loader": "^3.7.2",
     "react-dom": "^16.13.1",
     "react-is": "^16.13.1",
+    "semantic-release": "^17.1.1",
     "source-map-explorer": "^2.4.2",
     "ts-loader": "^8.0.1",
     "tsdx": "^0.13.2",

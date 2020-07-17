@@ -18,7 +18,6 @@ module.exports = {
     tsconfigRootDir: __dirname,
     project: ['./tsconfig.json'],
   },
-  ignorePatterns: ['examples/*', '.eslintrc.js', 'jest.config.js'],
   env: {
     'jest/globals': true,
   },

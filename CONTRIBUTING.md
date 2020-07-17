@@ -16,8 +16,6 @@
       - [`test:coverage`](#testcoverage)
       - [`test`](#test)
       - [`analyze:bundle`](#analyzebundle)
-      - [`changelog`](#changelog)
-      - [`release`](#release)
     - [File Structure](#file-structure)
 
 ## Project Setup
@@ -95,14 +93,6 @@ Automatically will check whether is in CI env.
 Runs [`source-map-explorer`](https://github.com/danvk/source-map-explorer) over built library.
 
 The script is run in **production** mode.
-
-#### `changelog`
-
-Runs [`perfekt changelog`](https://github.com/lekterable/perfekt#changelog).
-
-#### `release`
-
-Runs [`perfekt release`](https://github.com/lekterable/perfekt#release).
 
 ### File Structure
 

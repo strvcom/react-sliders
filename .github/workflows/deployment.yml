@@ -1,18 +1,17 @@
-name: CI
+name: Continuous Deployment
 
 on:
   push:
     branches:
-      - master
-  pull_request:
+      - release/*
 
 env:
   CI: true
   NODE_VERSION: 12.x
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
+  verify:
+    runs-on: ubuntu-18.04
 
     steps:
       - name: Begin CI...
@@ -34,14 +33,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Validate formatting
-        run: npm run prettier:validate
+      - name: Semantic Release
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Lint
-        run: npm run lint
-
-      - name: Test
-        run: npm run test --maxWorkers=2
-
-      - name: Build
-        run: npm run build
+      - name: Post-release sync
+        run: ./scripts/sync.sh
+        if: success()
