@@ -108,6 +108,8 @@ const SliderExample = () => {
 }
 ```
 
+If you want so see more, head to the [list of existing CodeSandbox examples](examples/README.md).
+
 ### Hooks API
 
 - [`useSlider`](src/hooks/docs/useSlider.md)
