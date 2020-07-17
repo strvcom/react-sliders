@@ -26,7 +26,7 @@
 import React from 'react'
 import { useRangeSlider, TRangeTuple } from '@strv/react-sliders'
 
-const SliderExample = () => {
+const RangeSliderExample = () => {
   const [value, setValue] = React.useState<TRangeTuple>([0, 100])
   const { getRailProps, getTrackProps, getMinHandleProps, getMaxHandleProps } = useRangeSlider({
     value,
@@ -55,7 +55,7 @@ import { useRangeSlider, TRangeTuple, IRangeMarker } from '@strv/react-sliders'
 
 const markers: IRangeMarker = [{ value: 0 }, { value: 50 }, { value: 100 }]
 
-const SliderExample = () => {
+const RangeSliderExample = () => {
   const [value, setValue] = React.useState<TRangeTuple>([0, 100])
   const { getRailProps, getTrackProps, getMinHandleProps, getMaxHandleProps } = useRangeSlider({
     value,

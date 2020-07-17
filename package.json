@@ -1,6 +1,14 @@
 {
   "version": "1.0.0",
   "name": "@strv/react-sliders",
+  "description": "CSS agnostic React Sliders",
+  "keywords": [
+    "react",
+    "sliders",
+    "css-agnostic",
+    "hooks",
+    "headless"
+  ],
   "license": "MIT",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
