@@ -40,7 +40,6 @@
 - [x] Fully typed with TypeScript
 - [x] Based on [our already existing open source tools](https://www.strv.io/tools/frontend)
   - [`code-quality-tools`](https://github.com/strvcom/code-quality-tools)
-  - [`perfekt`](https://github.com/lekterable/perfekt)
 
 ## Install
 
