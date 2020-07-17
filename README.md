@@ -4,6 +4,7 @@
 ![Dependabot](https://flat.badgen.net/dependabot/strvcom/react-sliders?icon=dependabot)
 [![Mergify Status][mergify-status]][mergify]
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+[![npm latest](https://badgen.net/npm/v/@strv/react-sliders)](https://www.npmjs.com/package/@strv/react-sliders)
 [![bundlephobia](https://badgen.net/bundlephobia/minzip/@strv/react-sliders)](https://bundlephobia.com/result?p=@strv/react-sliders)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
@@ -36,11 +37,11 @@
   - with forms, ...
 - [x] Tree-shakeable & Optimized bundle
   - out of the box thanks to [`TSDX`](https://github.com/formik/tsdx).
-- [ ] Properly tested
-- [x] Well documented API with interactive examples on [CodeSandbox](https://codesandbox.io/)
+- [x] [Documented API](#hooks-api) with [interactive examples on CodeSandbox](examples/README.md)
 - [x] Fully typed with TypeScript
 - [x] Based on [our already existing open source tools](https://www.strv.io/tools/frontend)
   - [`code-quality-tools`](https://github.com/strvcom/code-quality-tools)
+- [ ] **WIP** Properly tested
 
 ## Install
 
