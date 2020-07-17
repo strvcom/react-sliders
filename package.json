@@ -9,6 +9,7 @@
     "node": ">=10"
   },
   "files": [
+    "src",
     "dist",
     "LICENSE",
     "README.md"
@@ -16,6 +17,7 @@
   "author": "Lukas Hudec <lukas.hudec@strv.com>",
   "contributors": [],
   "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
     "access": "public"
   },
   "scripts": {

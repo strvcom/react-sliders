@@ -12,14 +12,14 @@ module.exports = {
       '@semantic-release/npm',
       {
         npmPublish: true,
-        tarballDir: 'dist',
+        tarballDir: '.',
       },
     ],
     '@semantic-release/git',
     [
       '@semantic-release/github',
       {
-        assets: [{ path: 'dist' }],
+        assets: [{ path: '*.tgz', label: '@strv/react-sliders.tgz' }],
       },
     ],
   ],
