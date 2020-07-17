@@ -1,0 +1,44 @@
+name: Continuous Deployment
+
+on:
+  push:
+    branches:
+      - release/*
+
+env:
+  CI: true
+  NODE_VERSION: 12.x
+
+jobs:
+  verify:
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Begin CI...
+        uses: actions/checkout@v2
+
+      - name: Use Node 12
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Use cached node_modules
+        uses: actions/cache@v1
+        with:
+          path: node_modules
+          key: nodeModules-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            nodeModules-
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Semantic Release
+        run: npx semantic-release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Post-release sync
+        run: ./scripts/sync.sh
+        if: success()
