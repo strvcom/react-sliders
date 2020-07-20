@@ -1,0 +1,87 @@
+.example-container {
+  padding: 2rem;
+
+  --primary-color: #ef0d33;
+  --grey-color: #cbcbcb;
+  --white-color: #fff;
+}
+
+.slider-container {
+  position: relative;
+  box-sizing: content-box;
+  width: 100%;
+  height: 0.3rem;
+  padding: 1.1rem 0 2.6rem;
+
+  /* space for marker labels */
+  margin-top: 3rem;
+}
+
+.slider-rail {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 0.3rem;
+  background-color: var(--grey-color);
+  border-radius: 0.1rem;
+}
+
+.slider-track {
+  position: absolute;
+  display: block;
+  height: 0.3rem;
+  background-color: var(--primary-color);
+  border-radius: 0.1rem;
+}
+
+.slider-handle {
+  position: absolute;
+  cursor: pointer;
+  width: 2.4rem;
+  height: 2.4rem;
+  transform: translate3d(-50%, -50%, 0);
+  background-color: var(--white-color);
+  box-shadow: 0 0.3rem 0.1rem rgba(0, 0, 0, 0.1), 0 0.4rem 0.8rem rgba(0, 0, 0, 0.13),
+    0 0 0 0.1rem rgba(0, 0, 0, 0);
+  border-radius: 50%;
+  transition: box-shadow 200ms ease-in-out, transform 200ms ease-in-out;
+  outline: none;
+}
+
+.slider-handle:hover,
+.slider-handle:focus {
+  transform: scale(1.1) translate3d(-50%, -50%, 0);
+  z-index: 2;
+  box-shadow: 0 0.3rem 0.1rem rgba(0, 0, 0, 0.1), 0 0.4rem 0.8rem rgba(0, 0, 0, 0.3),
+    0 0 0 0.1rem rgba(0, 0, 0, 0.02);
+}
+
+.slider-handle:active {
+  z-index: 2;
+  box-shadow: 0 0.3rem 0.1rem rgba(0, 0, 0, 0.1), 0 0.4rem 0.8rem rgba(0, 0, 0, 0.4),
+    0 0 0 0.1rem rgba(0, 0, 0, 0.04);
+}
+
+.slider-marker {
+  position: absolute;
+  width: 0.2rem;
+  height: 0.9rem;
+  transform: translate3d(-0.1rem, -0.3rem, 0);
+  background-color: var(--grey-color);
+}
+
+.slider-marker__in-range {
+  background-color: var(--primary-color);
+}
+
+.slider-marker-label {
+  position: absolute;
+  min-width: 8rem;
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: var(--grey-color);
+  user-select: none;
+
+  text-align: center;
+  transform: translate3d(-50%, -3.2rem, 0);
+}
