@@ -3,7 +3,6 @@ import styled from 'styled-components'
 const colors = {
   primary: '#ef0d33',
   grey: '#cbcbcb',
-  black: '#2f2f31',
   white: '#fff',
 }
 
