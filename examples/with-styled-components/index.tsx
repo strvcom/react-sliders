@@ -5,6 +5,7 @@ import { TRangeTuple } from '@strv/react-sliders'
 
 import { Slider } from './components/Slider'
 import { RangeSlider } from './components/RangeSlider'
+import { ExampleContainer } from './styles'
 
 const markers = [
   { value: 0 },
@@ -22,7 +23,7 @@ const App = () => {
   const [range, setRange] = React.useState<TRangeTuple>([0, 100])
 
   return (
-    <>
+    <ExampleContainer>
       <h1>Styled Components Examples</h1>
 
       <h2>Slider</h2>
@@ -44,7 +45,7 @@ const App = () => {
         markers={markers}
         formatValue={exampleFormatter}
       />
-    </>
+    </ExampleContainer>
   )
 }
 

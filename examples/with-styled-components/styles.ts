@@ -7,6 +7,10 @@ const colors = {
   white: '#fff',
 }
 
+const ExampleContainer = styled.div`
+  padding: 2rem;
+`
+
 const SliderContainer = styled.div`
   position: relative;
   box-sizing: content-box;
@@ -97,4 +101,12 @@ const SliderMarkerLabel = styled.span`
   }
 `
 
-export { SliderContainer, SliderRail, SliderTrack, SliderHandle, SliderMarker, SliderMarkerLabel }
+export {
+  ExampleContainer,
+  SliderContainer,
+  SliderRail,
+  SliderTrack,
+  SliderHandle,
+  SliderMarker,
+  SliderMarkerLabel,
+}
