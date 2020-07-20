@@ -1,5 +1,5 @@
 {
-  "name": "with-styled-components-example",
+  "name": "with-formik-example",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@strv/react-sliders": "^1.0.0",
+    "formik": "^2.1.5",
     "react": "^16.13.1",
     "react-app-polyfill": "^1.0.0",
     "react-dom": "^16.13.1",
