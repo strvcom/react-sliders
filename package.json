@@ -22,11 +22,18 @@
     "LICENSE",
     "README.md"
   ],
-  "author": "Lukas Hudec <lukas.hudec@strv.com>",
-  "contributors": [],
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",
     "access": "public"
+  },
+  "author": "Lukas Hudec <lukas.hudec@strv.com>",
+  "contributors": [],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/strvcom/react-sliders.git"
+  },
+  "bugs": {
+    "url": "https://github.com/strvcom/react-sliders/issues"
   },
   "scripts": {
     "dev": "tsdx watch",
