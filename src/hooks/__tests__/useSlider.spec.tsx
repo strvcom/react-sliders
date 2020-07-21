@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, act, fireEvent } from '@testing-library/react'
 
 import { IUseSlider, useSlider } from '../useSlider'
 import { IRangeMarker } from '../../types'
@@ -99,7 +99,33 @@ describe('useSlider', () => {
    * set the page or client sizes.
    *
    * The recommended way is to use for example Cypress to test such behavior in full browser
-   * experience
+   * experience.
    * @see https://github.com/testing-library/react-testing-library/issues/353
    */
+  describe('user interaction', () => {
+    /**
+     * This test is just a naive implementation how the moving logic should be tested, unfortunately
+     * given the reasons mentioned above, this case is not reliable
+     */
+    it('should trigger onChange with appropriate data when moving with min thumb', () => {
+      const onChangeSpy = jest.fn()
+
+      const { container, getHandleElement } = renderSlider({
+        min: 0,
+        max: 100,
+        value: 0,
+        onChange: onChangeSpy,
+      })
+
+      const handleElement = getHandleElement()
+
+      act(() => {
+        fireEvent.mouseDown(handleElement, { clientX: 0 })
+        fireEvent.mouseMove(container, { clientX: 100 })
+        fireEvent.mouseUp(container)
+      })
+
+      expect(onChangeSpy).toHaveBeenCalledWith(100)
+    })
+  })
 })
