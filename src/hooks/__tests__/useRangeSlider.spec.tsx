@@ -111,27 +111,39 @@ describe('useRangeSlider', () => {
     getByText('$100')
   })
 
+  /**
+   * ⚠️Warning!
+   * We are not able to properly test user interaction in JSDOM environment as we are not able to
+   * set the page or client sizes.
+   *
+   * The recommended way is to use for example Cypress to test such behavior in full browser
+   * experience.
+   * @see https://github.com/testing-library/react-testing-library/issues/353
+   */
   describe('user interaction', () => {
-    // TODO: find out how to set container size in testing environment
-    it.skip('should trigger onChange with appropriate data when moving with min thumb', () => {
+    /**
+     * This test is just a naive implementation how the moving logic should be tested, unfortunately
+     * given the reasons mentioned above, this case is not reliable
+     */
+    it('should trigger onChange with appropriate data when moving with min thumb', () => {
       const onChangeSpy = jest.fn()
 
-      const { getMinHandleElement } = renderRangeSlider({
+      const { container, getMinHandleElement } = renderRangeSlider({
         min: 0,
         max: 100,
         value: [0, 100],
         onChange: onChangeSpy,
       })
 
-      const minHandleElement = getMinHandleElement()
+      const handleElement = getMinHandleElement()
 
       act(() => {
-        fireEvent.mouseDown(minHandleElement, { clientX: 0 })
-        fireEvent.mouseMove(minHandleElement, { clientX: 50 })
-        fireEvent.mouseUp(minHandleElement)
+        fireEvent.mouseDown(handleElement, { clientX: 0 })
+        fireEvent.mouseMove(container, { clientX: 100 })
+        fireEvent.mouseUp(container)
       })
 
-      expect(onChangeSpy).toHaveBeenCalledWith([10, 100])
+      expect(onChangeSpy).toHaveBeenCalledWith([100, 100])
     })
   })
 })
