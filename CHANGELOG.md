@@ -1,3 +1,11 @@
+## [1.0.1](https://github.com/strvcom/react-sliders/compare/1.0.0...1.0.1) (2020-07-21)
+
+
+### Bug Fixes
+
+* add relevant package.json fields ([#46](https://github.com/strvcom/react-sliders/issues/46)) ([69dfb9c](https://github.com/strvcom/react-sliders/commit/69dfb9cf36e8f20e1def53fe387171aaca874946))
+* **examples:** update slider import to actual deployed package  ([#35](https://github.com/strvcom/react-sliders/issues/35)) ([020768a](https://github.com/strvcom/react-sliders/commit/020768aba243291f44c1af95a184a90a12280215))
+
 # 1.0.0 (2020-07-17)
 
 
