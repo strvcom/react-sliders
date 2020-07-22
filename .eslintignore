@@ -2,5 +2,6 @@ node_modules
 .cache
 dist
 examples
+cypress
 *.js
 *.d.ts

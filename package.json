@@ -47,6 +47,7 @@
     "test": "is-ci \"test:coverage\" \"test:watch\"",
     "test:watch": "tsdx test --watch --verbose --env=jest-environment-jsdom-sixteen",
     "test:coverage": "tsdx test --coverage --env=jest-environment-jsdom-sixteen",
+    "test:e2e": "cypress open",
     "analyze:bundle": "source-map-explorer dist/*.js"
   },
   "peerDependencies": {
@@ -67,6 +68,9 @@
     "@types/react-dom": "^16.9.8",
     "@types/styled-components": "^5.1.1",
     "babel-loader": "^8.1.0",
+    "css-loader": "^3.6.0",
+    "cypress": "^4.11.0",
+    "cypress-react-unit-test": "^4.11.1",
     "eslint": "^7.4.0",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.22.0",
@@ -82,9 +86,11 @@
     "react-is": "^16.13.1",
     "semantic-release": "^17.1.1",
     "source-map-explorer": "^2.4.2",
+    "style-loader": "^1.2.1",
     "ts-loader": "^8.0.1",
     "tsdx": "^0.13.2",
     "tslib": "^2.0.0",
-    "typescript": "^3.9.6"
+    "typescript": "^3.9.7",
+    "webpack": "^4.43.0"
   }
 }

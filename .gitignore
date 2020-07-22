@@ -1,5 +1,13 @@
 *.log
 .DS_Store
+
+# dependencies
 node_modules
+
+# generated
 .cache
 dist
+
+# coverage
+.nyc_output
+coverage
