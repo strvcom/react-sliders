@@ -173,7 +173,7 @@ describe('useSlider', () => {
       cy.get('@handle').should('have.attr', 'aria-valuetext', '$90')
     })
 
-    it('should set slider value to max by pressing end on keyboard', () => {
+    it('should set slider value to max by pressing home on keyboard', () => {
       mountSlider()
 
       cy.get('.slider-handle').as('handle')
@@ -187,7 +187,7 @@ describe('useSlider', () => {
       cy.get('@handle').should('have.attr', 'aria-valuetext', '$100')
     })
 
-    it('should set slider value to min by pressing home on keyboard', () => {
+    it('should set slider value to min by pressing end on keyboard', () => {
       mountSlider({ initialValue: 100 })
 
       cy.get('.slider-handle').as('handle')
