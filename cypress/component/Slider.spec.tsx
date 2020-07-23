@@ -4,7 +4,7 @@ import { mount, unmount } from 'cypress-react-unit-test'
 import { TestSlider, ITestSliderProps } from '../fixtures/components/Slider'
 import '../fixtures/components/styles.css'
 
-import { IRangeMarker } from '../../src/types'
+import { IRangeMarker, KeyCodes } from '../../src/types'
 
 const demoMarkers: IRangeMarker[] = [
   { value: 0 },
@@ -66,9 +66,9 @@ describe('useSlider', () => {
 
       cy.get('.slider-handle').as('handle')
 
-      cy.get('@handle').trigger('mousedown', { clientX: 0 }).wait(500)
+      cy.get('@handle').trigger('mousedown', { clientX: 0 }).wait(200)
 
-      cy.document().trigger('mousemove', { clientX: MIDDLE_X }).wait(150)
+      cy.document().trigger('mousemove', { clientX: MIDDLE_X }).wait(200)
       cy.document().trigger('mouseup')
 
       cy.get('@handle').should('have.attr', 'aria-valuenow', '50')
@@ -80,19 +80,22 @@ describe('useSlider', () => {
 
       cy.get('.slider-handle').as('handle')
 
+      const touchStart = [{ clientX: 0, identifier: 1 }]
+      const touchMove = [{ clientX: MIDDLE_X, identifier: 1 }]
+
       cy.get('@handle')
         .trigger('touchstart', {
-          touches: [{ clientX: 0, identifier: 1 }],
-          changedTouches: [{ clientX: 0, identifier: 1 }],
+          touches: touchStart,
+          changedTouches: touchStart,
         })
-        .wait(500)
+        .wait(200)
 
       cy.get('@handle')
         .trigger('touchmove', {
-          touches: [{ clientX: MIDDLE_X, identifier: 1 }],
-          changedTouches: [{ clientX: MIDDLE_X, identifier: 1 }],
+          touches: touchMove,
+          changedTouches: touchMove,
         })
-        .wait(150)
+        .wait(200)
       cy.get('@handle').trigger('touchend')
 
       cy.get('@handle').should('have.attr', 'aria-valuenow', '50')
@@ -101,21 +104,29 @@ describe('useSlider', () => {
   })
 
   describe('keyboard', () => {
-    it.skip('should increase slider value by pressing right or up arrow on keyboard', () => {})
+    it('should increase slider value by pressing right or up arrow on keyboard', () => {
+      mountSlider()
+
+      cy.get('.slider-handle').as('handle')
+
+      cy.get('@handle').should('have.attr', 'aria-valuenow', '0')
+      cy.get('@handle').should('have.attr', 'aria-valuetext', '$0')
+
+      cy.get('@handle').trigger('focus').trigger('keydown', { keyCode: KeyCodes.right }).wait(200)
+
+      cy.get('@handle').should('have.attr', 'aria-valuenow', '1')
+      cy.get('@handle').should('have.attr', 'aria-valuetext', '$1')
+
+      cy.get('@handle').trigger('focus').trigger('keydown', { keyCode: KeyCodes.up }).wait(200)
+
+      cy.get('@handle').should('have.attr', 'aria-valuenow', '2')
+      cy.get('@handle').should('have.attr', 'aria-valuetext', '$2')
+    })
+
     it.skip('should decrease slider value by pressing left or down arrow on keyboard', () => {})
     it.skip('should increase slider value by pressing page down on keyboard', () => {})
     it.skip('should decrease slider value by pressing page up on keyboard', () => {})
     it.skip('should set slider value to max by pressing end on keyboard', () => {})
     it.skip('should set slider value to min by pressing home on keyboard', () => {})
   })
-
-  // it('renders a self-controlled Slider', () => {
-  //   mountSlider()
-
-  //   cy.get('.slider-handle').trigger('mousedown', { clientX: 0 }).wait(500)
-
-  //   cy.document().trigger('mousemove', { clientX: 500 }).wait(150)
-
-  //   cy.document().trigger('mouseup')
-  // })
 })
