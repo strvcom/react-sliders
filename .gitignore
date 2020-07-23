@@ -1,5 +1,15 @@
 *.log
 .DS_Store
+
+# dependencies
 node_modules
+
+# generated
 .cache
 dist
+cypress/videos
+cypress/screenshots
+
+# coverage
+.nyc_output
+coverage
