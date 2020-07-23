@@ -86,7 +86,54 @@ describe('useRangeSlider', () => {
       cy.get('@handle-max').should('have.attr', 'aria-valuetext', '$75')
     })
 
-    it('should properly set slider value based on touch movement', () => {})
+    it('should properly set slider value based on touch movement', () => {
+      mountSlider()
+
+      cy.findByTestId('slider-handle-min').as('handle-min')
+      cy.findByTestId('slider-handle-max').as('handle-max')
+
+      const minTouchStart = [{ clientX: 0, identifier: 1 }]
+      const minTouchMove = [{ clientX: 242, identifier: 1 }]
+
+      const maxTouchStart = [{ clientX: 1000, identifier: 1 }]
+      const maxTouchMove = [{ clientX: 760, identifier: 1 }]
+
+      cy.get('@handle-min')
+        .trigger('touchstart', {
+          touches: minTouchStart,
+          changedTouches: minTouchStart,
+        })
+        .wait(200)
+
+      cy.get('@handle-min')
+        .trigger('touchmove', {
+          touches: minTouchMove,
+          changedTouches: minTouchMove,
+        })
+        .wait(200)
+      cy.get('@handle-min').trigger('touchend')
+
+      cy.get('@handle-min').should('have.attr', 'aria-valuenow', '25')
+      cy.get('@handle-min').should('have.attr', 'aria-valuetext', '$25')
+
+      cy.get('@handle-max')
+        .trigger('touchstart', {
+          touches: maxTouchStart,
+          changedTouches: maxTouchStart,
+        })
+        .wait(200)
+
+      cy.get('@handle-max')
+        .trigger('touchmove', {
+          touches: maxTouchMove,
+          changedTouches: maxTouchMove,
+        })
+        .wait(200)
+      cy.get('@handle-max').trigger('touchend')
+
+      cy.get('@handle-max').should('have.attr', 'aria-valuenow', '75')
+      cy.get('@handle-max').should('have.attr', 'aria-valuetext', '$75')
+    })
   })
 
   describe.skip('keyboard', () => {
