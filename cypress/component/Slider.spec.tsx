@@ -123,7 +123,25 @@ describe('useSlider', () => {
       cy.get('@handle').should('have.attr', 'aria-valuetext', '$2')
     })
 
-    it.skip('should decrease slider value by pressing left or down arrow on keyboard', () => {})
+    it('should decrease slider value by pressing left or down arrow on keyboard', () => {
+      mountSlider({ initialValue: 10 })
+
+      cy.get('.slider-handle').as('handle')
+
+      cy.get('@handle').should('have.attr', 'aria-valuenow', '10')
+      cy.get('@handle').should('have.attr', 'aria-valuetext', '$10')
+
+      cy.get('@handle').trigger('focus').trigger('keydown', { keyCode: KeyCodes.left }).wait(200)
+
+      cy.get('@handle').should('have.attr', 'aria-valuenow', '9')
+      cy.get('@handle').should('have.attr', 'aria-valuetext', '$9')
+
+      cy.get('@handle').trigger('focus').trigger('keydown', { keyCode: KeyCodes.down }).wait(200)
+
+      cy.get('@handle').should('have.attr', 'aria-valuenow', '8')
+      cy.get('@handle').should('have.attr', 'aria-valuetext', '$8')
+    })
+
     it.skip('should increase slider value by pressing page down on keyboard', () => {})
     it.skip('should decrease slider value by pressing page up on keyboard', () => {})
     it.skip('should set slider value to max by pressing end on keyboard', () => {})
