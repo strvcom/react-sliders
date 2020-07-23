@@ -156,7 +156,23 @@ describe('useSlider', () => {
       cy.get('@handle').should('have.attr', 'aria-valuetext', '$10')
     })
 
-    it.skip('should decrease slider value by pressing page up on keyboard', () => {})
+    it.only('should decrease slider value by pressing page up on keyboard', () => {
+      mountSlider({ initialValue: 100 })
+
+      cy.get('.slider-handle').as('handle')
+
+      cy.get('@handle').should('have.attr', 'aria-valuenow', '100')
+      cy.get('@handle').should('have.attr', 'aria-valuetext', '$100')
+
+      cy.get('@handle')
+        .trigger('focus')
+        .trigger('keydown', { keyCode: KeyCodes.pageDown })
+        .wait(200)
+
+      cy.get('@handle').should('have.attr', 'aria-valuenow', '90')
+      cy.get('@handle').should('have.attr', 'aria-valuetext', '$90')
+    })
+
     it.skip('should set slider value to max by pressing end on keyboard', () => {})
     it.skip('should set slider value to min by pressing home on keyboard', () => {})
   })
