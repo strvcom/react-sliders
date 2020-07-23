@@ -40,5 +40,8 @@ jobs:
       - name: Test
         run: npm run test --maxWorkers=2
 
+      - name: E2E Tests
+        uses: cypress-io/github-action@v2
+
       - name: Build
         run: npm run build
