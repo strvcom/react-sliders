@@ -4,7 +4,7 @@ import { mount, unmount } from 'cypress-react-unit-test'
 import { TestRangeSlider, ITestRangeSliderProps } from '../fixtures/components/RangeSlider'
 import '../fixtures/components/styles.css'
 
-import { IRangeMarker } from '../../src/types'
+import { IRangeMarker, KeyCodes } from '../../src/types'
 
 const demoMarkers: IRangeMarker[] = [
   { value: 0 },
@@ -86,7 +86,7 @@ describe('useRangeSlider', () => {
       cy.get('@handle-max').should('have.attr', 'aria-valuetext', '$75')
     })
 
-    it('should properly set slider value based on touch movement', () => {
+    it('should properly set sliders value based on touch movement', () => {
       mountSlider()
 
       cy.findByTestId('slider-handle-min').as('handle-min')
@@ -136,8 +136,47 @@ describe('useRangeSlider', () => {
     })
   })
 
-  describe.skip('keyboard', () => {
-    it('should increase slider value by pressing right or up arrow on keyboard', () => {})
+  describe('keyboard', () => {
+    it('should increase slider value by pressing right or up arrow on keyboard', () => {
+      mountSlider({ initialValue: [10, 90] })
+
+      cy.findByTestId('slider-handle-min').as('handle-min')
+      cy.findByTestId('slider-handle-max').as('handle-max')
+
+      cy.get('@handle-min').should('have.attr', 'aria-valuenow', '10')
+      cy.get('@handle-min').should('have.attr', 'aria-valuetext', '$10')
+
+      cy.get('@handle-min')
+        .trigger('focus')
+        .trigger('keydown', { keyCode: KeyCodes.right })
+        .wait(200)
+        .trigger('blur')
+
+      cy.get('@handle-min').should('have.attr', 'aria-valuenow', '11')
+      cy.get('@handle-min').should('have.attr', 'aria-valuetext', '$11')
+
+      cy.get('@handle-min').trigger('focus').trigger('keydown', { keyCode: KeyCodes.up }).wait(200)
+
+      cy.get('@handle-min').should('have.attr', 'aria-valuenow', '12')
+      cy.get('@handle-min').should('have.attr', 'aria-valuetext', '$12')
+
+      cy.get('@handle-max').should('have.attr', 'aria-valuenow', '90')
+      cy.get('@handle-max').should('have.attr', 'aria-valuetext', '$90')
+
+      cy.get('@handle-max')
+        .trigger('focus')
+        .trigger('keydown', { keyCode: KeyCodes.right })
+        .wait(200)
+        .trigger('blur')
+
+      cy.get('@handle-max').should('have.attr', 'aria-valuenow', '91')
+      cy.get('@handle-max').should('have.attr', 'aria-valuetext', '$91')
+
+      cy.get('@handle-max').trigger('focus').trigger('keydown', { keyCode: KeyCodes.up }).wait(200)
+
+      cy.get('@handle-max').should('have.attr', 'aria-valuenow', '92')
+      cy.get('@handle-max').should('have.attr', 'aria-valuetext', '$92')
+    })
 
     it('should decrease slider value by pressing left or down arrow on keyboard', () => {})
 
