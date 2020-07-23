@@ -31,11 +31,6 @@ const mountSlider = (propsOverrides: Partial<ITestRangeSliderProps> = {}) => {
   )
 }
 
-const WINDOW_SIZE = 1000
-const MARGIN = 32
-const HANDLE_OFFSET = 12
-const MIDDLE_X = WINDOW_SIZE / 2 - MARGIN - HANDLE_OFFSET
-
 describe('useRangeSlider', () => {
   afterEach(() => {
     unmount()
@@ -67,8 +62,29 @@ describe('useRangeSlider', () => {
     cy.findByText('$100').should('exist')
   })
 
-  describe.skip('mouse & touch', () => {
-    it('should properly set slider value based on mouse movement', () => {})
+  describe('mouse & touch', () => {
+    it('should properly set sliders value based on mouse movement', () => {
+      mountSlider()
+
+      cy.findByTestId('slider-handle-min').as('handle-min')
+      cy.findByTestId('slider-handle-max').as('handle-max')
+
+      cy.get('@handle-min').trigger('mousedown', { clientX: 0 }).wait(200)
+
+      cy.document().trigger('mousemove', { clientX: 242 }).wait(200)
+      cy.document().trigger('mouseup')
+
+      cy.get('@handle-min').should('have.attr', 'aria-valuenow', '25')
+      cy.get('@handle-min').should('have.attr', 'aria-valuetext', '$25')
+
+      cy.get('@handle-max').trigger('mousedown', { clientX: 1000 }).wait(200)
+
+      cy.document().trigger('mousemove', { clientX: 760 }).wait(200)
+      cy.document().trigger('mouseup')
+
+      cy.get('@handle-max').should('have.attr', 'aria-valuenow', '75')
+      cy.get('@handle-max').should('have.attr', 'aria-valuetext', '$75')
+    })
 
     it('should properly set slider value based on touch movement', () => {})
   })
