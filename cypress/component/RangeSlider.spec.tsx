@@ -1,8 +1,8 @@
 import React from 'react'
 import { mount, unmount } from 'cypress-react-unit-test'
 
-import { TestRangeSlider, ITestRangeSliderProps } from '../fixtures/components/RangeSlider'
-import '../fixtures/components/styles.css'
+import { TestRangeSlider, ITestRangeSliderProps } from '../helpers/components/RangeSlider'
+import '../helpers/components/styles.css'
 
 import { IRangeMarker, KeyCodes } from '../../src/types'
 

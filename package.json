@@ -47,7 +47,8 @@
     "test": "is-ci \"test:coverage\" \"test:watch\"",
     "test:watch": "tsdx test --watch --verbose --env=jest-environment-jsdom-sixteen",
     "test:coverage": "tsdx test --coverage --env=jest-environment-jsdom-sixteen",
-    "test:e2e": "cypress open",
+    "test:e2e:cli": "cypress run --browser=chrome",
+    "test:e2e:gui": "cypress open",
     "analyze:bundle": "source-map-explorer dist/*.js"
   },
   "peerDependencies": {
