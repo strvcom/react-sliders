@@ -1,28 +1,37 @@
 import React from 'react'
 
-import { useSlider } from '../../../src/hooks/useSlider'
+import { useSlider, IUseSlider } from '../../../src/hooks/useSlider'
 import { IRangeMarker } from '../../../src/types'
 
 import './styles.css'
 
-const markers: IRangeMarker[] = [
-  { value: 0 },
-  { value: 20 },
-  { value: 40 },
-  { value: 60 },
-  { value: 80 },
-  { value: 100 },
-]
+export interface ITestSliderProps extends Omit<IUseSlider, 'value' | 'onChange'> {
+  markers?: IRangeMarker[]
+  /**
+   * @default 0
+   */
+  initialValue?: number
+}
 
-const formatValue = (number) => `$${number}`
-
-const TestSlider: React.FC = () => {
-  const [value, setValue] = React.useState(0)
+/**
+ * This component exists purely and only as a mountable and configurable wrapper around `useSlider`
+ * hook
+ */
+const TestSlider: React.FC<ITestSliderProps> = ({
+  initialValue = 0,
+  min,
+  max,
+  step,
+  markers,
+  formatValue,
+}) => {
+  const [value, setValue] = React.useState(initialValue)
   const { getRailProps, getTrackProps, getHandleProps, getMarkerProps } = useSlider({
     value,
+    min,
+    max,
+    step,
     formatValue,
-    min: 0,
-    max: 100,
     onChange: setValue,
   })
 
