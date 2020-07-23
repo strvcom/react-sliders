@@ -225,9 +225,67 @@ describe('useRangeSlider', () => {
       cy.get('@handle-max').should('have.attr', 'aria-valuetext', '$88')
     })
 
-    it('should increase slider value by pressing page down on keyboard', () => {})
+    it('should increase slider value by pressing page down on keyboard', () => {
+      mountSlider({ initialValue: [10, 90] })
 
-    it('should decrease slider value by pressing page up on keyboard', () => {})
+      cy.findByTestId('slider-handle-min').as('handle-min')
+      cy.findByTestId('slider-handle-max').as('handle-max')
+
+      cy.get('@handle-min').should('have.attr', 'aria-valuenow', '10')
+      cy.get('@handle-min').should('have.attr', 'aria-valuetext', '$10')
+
+      cy.get('@handle-min')
+        .trigger('focus')
+        .trigger('keydown', { keyCode: KeyCodes.pageDown })
+        .wait(200)
+        .trigger('blur')
+
+      cy.get('@handle-min').should('have.attr', 'aria-valuenow', '0')
+      cy.get('@handle-min').should('have.attr', 'aria-valuetext', '$0')
+
+      cy.get('@handle-max').should('have.attr', 'aria-valuenow', '90')
+      cy.get('@handle-max').should('have.attr', 'aria-valuetext', '$90')
+
+      cy.get('@handle-max')
+        .trigger('focus')
+        .trigger('keydown', { keyCode: KeyCodes.pageDown })
+        .wait(200)
+        .trigger('blur')
+
+      cy.get('@handle-max').should('have.attr', 'aria-valuenow', '80')
+      cy.get('@handle-max').should('have.attr', 'aria-valuetext', '$80')
+    })
+
+    it('should decrease slider value by pressing page up on keyboard', () => {
+      mountSlider({ initialValue: [10, 90] })
+
+      cy.findByTestId('slider-handle-min').as('handle-min')
+      cy.findByTestId('slider-handle-max').as('handle-max')
+
+      cy.get('@handle-min').should('have.attr', 'aria-valuenow', '10')
+      cy.get('@handle-min').should('have.attr', 'aria-valuetext', '$10')
+
+      cy.get('@handle-min')
+        .trigger('focus')
+        .trigger('keydown', { keyCode: KeyCodes.pageUp })
+        .wait(200)
+        .trigger('blur')
+
+      cy.get('@handle-min').should('have.attr', 'aria-valuenow', '20')
+      cy.get('@handle-min').should('have.attr', 'aria-valuetext', '$20')
+
+      cy.get('@handle-max').should('have.attr', 'aria-valuenow', '90')
+      cy.get('@handle-max').should('have.attr', 'aria-valuetext', '$90')
+
+      cy.get('@handle-max')
+        .trigger('focus')
+        .trigger('keydown', { keyCode: KeyCodes.pageUp })
+        .wait(200)
+        .trigger('blur')
+
+      cy.get('@handle-max').should('have.attr', 'aria-valuenow', '100')
+      cy.get('@handle-max').should('have.attr', 'aria-valuetext', '$100')
+    })
 
     it('should set slider value to max by pressing end on keyboard', () => {})
 
