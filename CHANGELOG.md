@@ -1,3 +1,10 @@
+## [1.0.2](https://github.com/strvcom/react-sliders/compare/1.0.1...1.0.2) (2020-07-24)
+
+
+### Bug Fixes
+
+* use Cypress to test slider interactions ([#48](https://github.com/strvcom/react-sliders/issues/48)) ([91dbd02](https://github.com/strvcom/react-sliders/commit/91dbd023ad2231175edfa97b9257ed6da29f4d7b))
+
 ## [1.0.1](https://github.com/strvcom/react-sliders/compare/1.0.0...1.0.1) (2020-07-21)
 
 
