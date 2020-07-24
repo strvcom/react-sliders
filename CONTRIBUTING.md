@@ -15,6 +15,8 @@
       - [`test:watch`](#testwatch)
       - [`test:coverage`](#testcoverage)
       - [`test`](#test)
+      - [`test:e2e:cli`](#teste2ecli)
+      - [`test:e2e:gui`](#teste2egui)
       - [`analyze:bundle`](#analyzebundle)
     - [File Structure](#file-structure)
 
@@ -88,6 +90,14 @@ Automatically will check whether is in CI env.
 
 **This step is included in CI.**
 
+#### `test:e2e:cli`
+
+Triggers a Cypress run of all specs.
+
+#### `test:e2e:gui`
+
+Launches Cypress GUI where specific specs can be triggered.
+
 #### `analyze:bundle`
 
 Runs [`source-map-explorer`](https://github.com/danvk/source-map-explorer) over built library.
@@ -97,7 +107,9 @@ The script is run in **production** mode.
 ### File Structure
 
 ```
+cypress/       # E2E tests setup & specs
 config/        # Config files
 examples/      # Source files for interactive CodeSandbox demos
-src            # Library core
+scripts/       # Custom scripts for releasing, etc.
+src/           # Library core
 ```
