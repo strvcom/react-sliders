@@ -70,7 +70,7 @@
     "@types/react-dom": "^16.9.8",
     "@types/styled-components": "^5.1.1",
     "babel-loader": "^8.1.0",
-    "css-loader": "^3.6.0",
+    "css-loader": "^4.2.1",
     "cypress": "^4.11.0",
     "cypress-react-unit-test": "^4.11.1",
     "eslint": "^7.4.0",
