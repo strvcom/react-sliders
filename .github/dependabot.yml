@@ -1,0 +1,27 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/"
+  schedule:
+    interval: weekly
+    timezone: America/Los_Angeles
+  open-pull-requests-limit: 3
+  reviewers:
+  - xhudec
+  assignees:
+  - xhudec
+  ignore:
+  - dependency-name: "@babel/core"
+    versions:
+    - 7.12.10
+    - 7.12.13
+    - 7.12.16
+    - 7.13.10
+    - 7.13.13
+  - dependency-name: "@testing-library/cypress"
+    versions:
+    - 7.0.3
+    - 7.0.4
+  commit-message:
+    prefix: chore
+    include: scope
